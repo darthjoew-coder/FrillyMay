@@ -3,7 +3,7 @@ import './globals.css'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import SessionProvider from '@/components/providers/SessionProvider'
-import Sidebar from '@/components/layout/Sidebar'
+import NavLayout from '@/components/layout/NavLayout'
 
 export const metadata: Metadata = {
   title: 'Frilly May Farms',
@@ -17,7 +17,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body className="flex min-h-screen bg-gray-50">
         <SessionProvider session={session}>
-          <Sidebar />
+          <NavLayout />
           <main className="flex-1 flex flex-col min-h-screen overflow-auto">
             {children}
           </main>

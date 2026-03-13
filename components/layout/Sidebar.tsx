@@ -13,7 +13,12 @@ const navItems = [
   { href: '/accounting', label: 'Accounting', icon: '💰' },
 ]
 
-export default function Sidebar() {
+interface SidebarProps {
+  mobileOpen?: boolean
+  onClose?: () => void
+}
+
+export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   const pathname = usePathname()
   const { data: session } = useSession()
 
@@ -27,10 +32,15 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="w-60 shrink-0 bg-amber-950 text-amber-50 flex flex-col h-screen sticky top-0">
-      {/* Logo */}
-      <div className="flex flex-col items-center px-4 py-5 border-b border-amber-800">
-        <div className="relative w-40 h-28">
+    <aside className={`
+      fixed md:sticky top-0 inset-y-0 left-0 z-40
+      w-60 shrink-0 bg-amber-950 text-amber-50 flex flex-col h-screen
+      transition-transform duration-200 ease-in-out
+      ${mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+    `}>
+      {/* Logo + mobile close button */}
+      <div className="flex items-center justify-between px-4 py-5 border-b border-amber-800">
+        <div className="relative w-40 h-28 mx-auto">
           <Image
             src="/logo.png"
             alt="Frilly May Farms"
@@ -39,6 +49,16 @@ export default function Sidebar() {
             priority
           />
         </div>
+        {/* Close button — mobile only */}
+        <button
+          onClick={onClose}
+          className="md:hidden absolute top-3 right-3 text-amber-400 hover:text-amber-100 p-1"
+          aria-label="Close navigation"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
 
       {/* Nav */}
@@ -49,6 +69,7 @@ export default function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onClose}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 isActive
                   ? 'bg-green-700 text-white'
@@ -67,6 +88,7 @@ export default function Sidebar() {
             <div className="my-2 border-t border-amber-800" />
             <Link
               href="/admin/users"
+              onClick={onClose}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 pathname.startsWith('/admin/users')
                   ? 'bg-green-700 text-white'
