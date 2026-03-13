@@ -123,3 +123,80 @@ export interface ApiResponse<T> {
 export interface ApiError {
   error: string
 }
+
+export type PaymentMethod = 'cash' | 'check' | 'credit_card' | 'debit_card' | 'bank_transfer' | 'other'
+export type ProductLine = 'beef' | 'eggs' | 'general'
+export type ExpenseCategoryType = 'expense' | 'income'
+export type ExpenseStatus = 'draft' | 'finalized'
+export type SaleProductType = 'beef' | 'eggs' | 'other'
+
+export interface IExpenseCategory {
+  _id: string
+  name: string
+  type: ExpenseCategoryType
+  scheduleFBucket: string
+  active: boolean
+  sortOrder: number
+  createdAt: string
+  updatedAt: string
+}
+
+export interface IExpense {
+  _id: string
+  date: string
+  vendor: string
+  amount: number
+  categoryId: string
+  category?: Pick<IExpenseCategory, '_id' | 'name' | 'scheduleFBucket'>
+  subcategory?: string
+  paymentMethod: PaymentMethod
+  description?: string
+  notes?: string
+  productLine: ProductLine
+  taxYear: number
+  status: ExpenseStatus
+  receiptCount?: number
+  createdAt: string
+  updatedAt: string
+}
+
+export interface IReceipt {
+  _id: string
+  expenseId: string
+  fileName: string
+  mimeType: string
+  fileSize: number
+  uploadedAt: string
+}
+
+export interface ISale {
+  _id: string
+  date: string
+  productType: SaleProductType
+  quantity?: number
+  unit?: string
+  unitPrice?: number
+  totalAmount: number
+  customerName?: string
+  paymentMethod: PaymentMethod
+  referenceNumber?: string
+  notes?: string
+  taxYear: number
+  createdAt: string
+  updatedAt: string
+}
+
+export interface IAccountingReport {
+  year: number
+  income: {
+    totalAmount: number
+    byProductType: { productType: string; total: number; count: number }[]
+  }
+  expenses: {
+    totalAmount: number
+    byCategory: { categoryId: string; name: string; scheduleFBucket: string; total: number; count: number }[]
+    byScheduleF: { bucket: string; total: number }[]
+  }
+  netIncome: number
+  missingReceipts: number
+}

@@ -28,6 +28,7 @@ export const config = {
     '/health/:path*',
     '/feeding/:path*',
     '/breeding/:path*',
+    '/accounting/:path*',
     '/admin/:path*',
   ],
 }

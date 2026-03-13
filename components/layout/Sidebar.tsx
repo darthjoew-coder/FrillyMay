@@ -10,6 +10,7 @@ const navItems = [
   { href: '/health', label: 'Health & Treatments', icon: '🩺' },
   { href: '/feeding', label: 'Feeding & Nutrition', icon: '🌾' },
   { href: '/breeding', label: 'Breeding', icon: '🐣' },
+  { href: '/accounting', label: 'Accounting', icon: '💰' },
 ]
 
 export default function Sidebar() {
