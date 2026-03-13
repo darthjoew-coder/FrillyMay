@@ -5,6 +5,7 @@ import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
 import Textarea from '@/components/ui/Textarea'
 import Button from '@/components/ui/Button'
+import AnimalTagSearch from '@/components/ui/AnimalTagSearch'
 import { IBreedingEvent } from '@/types'
 import { SPECIES_OPTIONS, BREEDING_METHODS, BREEDING_STATUSES } from '@/lib/constants'
 
@@ -71,8 +72,22 @@ export default function BreedingForm({ initial, editId }: BreedingFormProps) {
       {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">{error}</div>}
 
       <div className="grid grid-cols-2 gap-4">
-        <Input label="Dam ID (Mother)" value={form.damId} onChange={e => set('damId', e.target.value)} required placeholder="Animal ObjectId" hint="Copy from the dam's animal profile" />
-        <Input label="Sire ID (Father, optional)" value={form.sireId} onChange={e => set('sireId', e.target.value)} placeholder="Animal ObjectId (if registered)" />
+        <AnimalTagSearch
+          label="Dam (Mother)"
+          value={form.damId}
+          onChange={id => set('damId', id)}
+          initialTag={initial?.dam?.tagId}
+          required
+          placeholder="Type dam tag number..."
+        />
+        <AnimalTagSearch
+          label="Sire (Father)"
+          value={form.sireId}
+          onChange={id => set('sireId', id)}
+          initialTag={initial?.sire?.tagId}
+          optional
+          placeholder="Type sire tag number..."
+        />
       </div>
 
       <div className="grid grid-cols-2 gap-4">

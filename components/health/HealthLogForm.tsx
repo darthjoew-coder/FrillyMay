@@ -5,6 +5,7 @@ import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
 import Textarea from '@/components/ui/Textarea'
 import Button from '@/components/ui/Button'
+import AnimalTagSearch from '@/components/ui/AnimalTagSearch'
 import { IHealthRecord } from '@/types'
 import { HEALTH_TYPES } from '@/lib/constants'
 
@@ -67,8 +68,13 @@ export default function HealthLogForm({ initial, editId, preselectedAnimalId }: 
       {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">{error}</div>}
 
       <div className="grid grid-cols-2 gap-4">
-        <Input label="Animal ID / Tag" value={form.animalId} onChange={e => set('animalId', e.target.value)} required
-          placeholder="Paste animal ObjectId" hint="Go to the animal profile and copy its ID" />
+        <AnimalTagSearch
+          label="Animal"
+          value={form.animalId}
+          onChange={id => set('animalId', id)}
+          initialTag={initial?.animal?.tagId}
+          required
+        />
         <Input label="Date" type="date" value={form.date} onChange={e => set('date', e.target.value)} required />
       </div>
 

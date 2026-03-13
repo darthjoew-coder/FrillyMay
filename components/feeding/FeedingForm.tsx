@@ -5,6 +5,7 @@ import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
 import Textarea from '@/components/ui/Textarea'
 import Button from '@/components/ui/Button'
+import AnimalTagSearch from '@/components/ui/AnimalTagSearch'
 import { IFeedingRecord } from '@/types'
 import { FEED_TYPES, FEEDING_TIME_OPTIONS, WATER_ACCESS_OPTIONS, UNIT_OPTIONS, SCHEDULE_FREQUENCIES } from '@/lib/constants'
 
@@ -73,7 +74,14 @@ export default function FeedingForm({ initial, editId }: FeedingFormProps) {
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <Input label="Animal ID (optional)" value={form.animalId} onChange={e => set('animalId', e.target.value)} placeholder="Leave blank for group" />
+        <AnimalTagSearch
+          label="Animal"
+          value={form.animalId}
+          onChange={id => set('animalId', id)}
+          initialTag={initial?.animal?.tagId}
+          optional
+          placeholder="Leave blank for group feeding"
+        />
         <Input label="Group / Pen Name (optional)" value={form.groupName} onChange={e => set('groupName', e.target.value)} placeholder="e.g. East Pasture" />
       </div>
 

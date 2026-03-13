@@ -90,7 +90,7 @@ export default async function SaleDetailPage({ params }: { params: Promise<{ id:
                 <p className="text-sm font-medium text-gray-900">{s.referenceNumber ? String(s.referenceNumber) : '—'}</p>
               </div>
             </div>
-            {s.notes && (
+            {!!s.notes && (
               <div>
                 <p className="text-xs text-gray-500">Notes</p>
                 <p className="text-sm text-gray-700 mt-0.5 whitespace-pre-wrap">{String(s.notes)}</p>

@@ -100,13 +100,13 @@ export default async function ExpenseDetailPage({ params }: { params: Promise<{ 
               )}
             </div>
 
-            {e.description && (
+            {!!e.description && (
               <div>
                 <p className="text-xs text-gray-500">Description</p>
                 <p className="text-sm text-gray-700 mt-0.5">{String(e.description)}</p>
               </div>
             )}
-            {e.notes && (
+            {!!e.notes && (
               <div>
                 <p className="text-xs text-gray-500">Notes</p>
                 <p className="text-sm text-gray-700 mt-0.5 whitespace-pre-wrap">{String(e.notes)}</p>
