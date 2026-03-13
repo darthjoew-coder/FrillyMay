@@ -15,7 +15,7 @@ export default async function SaleDetailPage({ params }: { params: Promise<{ id:
   const sale = await Sale.findById(id).lean()
   if (!sale) notFound()
 
-  const s = sale as Record<string, unknown>
+  const s = sale as unknown as Record<string, unknown>
 
   function productTypeBadge(type: string) {
     if (type === 'beef') return <Badge variant="brown">Beef</Badge>

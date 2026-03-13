@@ -12,7 +12,7 @@ export default async function EditExpensePage({ params }: { params: Promise<{ id
   const expense = await Expense.findById(id).populate('categoryId').lean()
   if (!expense) notFound()
 
-  const e = expense as Record<string, unknown>
+  const e = expense as unknown as Record<string, unknown>
   const category = e.categoryId as Record<string, unknown> | null
 
   // Flatten for form initial values

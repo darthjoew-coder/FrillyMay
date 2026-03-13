@@ -18,7 +18,7 @@ export default async function ExpenseDetailPage({ params }: { params: Promise<{ 
 
   const receipts = await Receipt.find({ expenseId: id }).select('-fileData').lean()
 
-  const e = expense as Record<string, unknown>
+  const e = expense as unknown as Record<string, unknown>
   const category = e.categoryId as Record<string, unknown> | null
 
   function statusBadge(status: string) {

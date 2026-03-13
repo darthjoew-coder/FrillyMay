@@ -12,7 +12,7 @@ export default async function EditSalePage({ params }: { params: Promise<{ id: s
   const sale = await Sale.findById(id).lean()
   if (!sale) notFound()
 
-  const s = sale as Record<string, unknown>
+  const s = sale as unknown as Record<string, unknown>
 
   const initial = {
     _id: String(s._id),
