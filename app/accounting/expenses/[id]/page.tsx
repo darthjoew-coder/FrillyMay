@@ -16,7 +16,8 @@ export default async function ExpenseDetailPage({ params }: { params: Promise<{ 
   const expense = await Expense.findById(id).populate('categoryId').lean()
   if (!expense) notFound()
 
-  const receipts = await Receipt.find({ expenseId: id }).select('-fileData').lean()
+  const receiptsRaw = await Receipt.find({ expenseId: id }).select('-fileData').lean()
+  const receipts = receiptsRaw as unknown as Record<string, unknown>[]
 
   const e = expense as unknown as Record<string, unknown>
   const category = e.categoryId as Record<string, unknown> | null
@@ -129,7 +130,7 @@ export default async function ExpenseDetailPage({ params }: { params: Promise<{ 
               </p>
             ) : (
               <ul className="space-y-2">
-                {receipts.map((r: Record<string, unknown>) => (
+                {receipts.map(r => (
                   <li key={String(r._id)} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
                       <a
