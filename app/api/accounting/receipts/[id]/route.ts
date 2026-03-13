@@ -11,7 +11,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
     const receipt = await Receipt.findById(id)
     if (!receipt) return NextResponse.json({ error: 'Receipt not found' }, { status: 404 })
 
-    return new Response(receipt.fileData, {
+    return new Response(new Uint8Array(receipt.fileData), {
       headers: {
         'Content-Type': receipt.mimeType,
         'Content-Disposition': `inline; filename="${encodeURIComponent(receipt.fileName)}"`,
