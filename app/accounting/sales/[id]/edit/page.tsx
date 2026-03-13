@@ -3,7 +3,7 @@ import TopBar from '@/components/layout/TopBar'
 import PageWrapper from '@/components/layout/PageWrapper'
 import SaleForm from '@/components/accounting/SaleForm'
 import { connectDB } from '@/lib/db'
-import Sale from '@/models/Sale'
+import { Sale } from '@/models/Sale'
 
 export default async function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params

@@ -5,7 +5,7 @@ import PageWrapper from '@/components/layout/PageWrapper'
 import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
 import { connectDB } from '@/lib/db'
-import Sale from '@/models/Sale'
+import { Sale } from '@/models/Sale'
 import { formatDate } from '@/lib/utils'
 
 export default async function SaleDetailPage({ params }: { params: Promise<{ id: string }> }) {

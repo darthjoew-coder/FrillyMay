@@ -3,7 +3,7 @@ import TopBar from '@/components/layout/TopBar'
 import PageWrapper from '@/components/layout/PageWrapper'
 import ExpenseForm from '@/components/accounting/ExpenseForm'
 import { connectDB } from '@/lib/db'
-import Expense from '@/models/Expense'
+import { Expense } from '@/models/Expense'
 
 export default async function EditExpensePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params

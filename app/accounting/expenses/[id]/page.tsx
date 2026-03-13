@@ -5,8 +5,8 @@ import PageWrapper from '@/components/layout/PageWrapper'
 import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
 import { connectDB } from '@/lib/db'
-import Expense from '@/models/Expense'
-import Receipt from '@/models/Receipt'
+import { Expense } from '@/models/Expense'
+import { Receipt } from '@/models/Receipt'
 import { formatDate } from '@/lib/utils'
 
 export default async function ExpenseDetailPage({ params }: { params: Promise<{ id: string }> }) {
