@@ -32,8 +32,10 @@ jobs:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
 
-      - name: Remove dev dependencies
-        run: npm prune --production
+      - name: Assemble standalone package
+        run: |
+          cp -r .next/static .next/standalone/.next/static
+          cp -r public .next/standalone/public
 
       - name: Azure Login
         uses: azure/login@v2
@@ -44,4 +46,4 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'FrillyMay'
-          package: .
+          package: .next/standalone
