@@ -11,7 +11,7 @@ async function getAnimal(id: string): Promise<IAnimal | null> {
     await connectDB()
     const animal = await Animal.findById(id).lean()
     if (!animal) return null
-    return animal as unknown as IAnimal
+    return JSON.parse(JSON.stringify(animal)) as IAnimal
   } catch {
     return null
   }
