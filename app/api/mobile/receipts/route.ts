@@ -92,10 +92,10 @@ export async function POST(req: NextRequest) {
       try {
         extractedData = JSON.parse(extractedDataStr)
         extractionStatus = extractedData.error ? 'failed' : 'completed'
-        status = extractionStatus === 'completed' ? 'needs_review' : 'failed'
+        status = extractionStatus === 'completed' ? 'needs_review' : 'needs_review'
       } catch {
         extractionStatus = 'failed'
-        status = 'failed'
+        status = 'needs_review'
       }
     }
 
@@ -121,7 +121,7 @@ export async function POST(req: NextRequest) {
     })
 
     // Return without binary fields
-    const responseData = receipt.toObject() as Record<string, unknown>
+    const responseData = receipt.toObject() as unknown as Record<string, unknown>
     delete responseData.imageData
     delete responseData.thumbnailData
     delete responseData.rawApiResponse
