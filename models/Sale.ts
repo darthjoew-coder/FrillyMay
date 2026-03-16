@@ -7,6 +7,7 @@ export interface ISaleDoc extends Document {
   unit?: string
   unitPrice?: number
   totalAmount: number
+  customerId?: mongoose.Types.ObjectId
   customerName?: string
   paymentMethod: string
   referenceNumber?: string
@@ -23,6 +24,7 @@ const SaleSchema = new Schema<ISaleDoc>(
     unit: { type: String, trim: true },
     unitPrice: { type: Number, min: 0 },
     totalAmount: { type: Number, required: true, min: 0 },
+    customerId: { type: Schema.Types.ObjectId, ref: 'Customer', default: null },
     customerName: { type: String, trim: true },
     paymentMethod: {
       type: String,
@@ -41,6 +43,8 @@ SaleSchema.index({ date: -1 })
 SaleSchema.index({ taxYear: 1, date: -1 })
 SaleSchema.index({ productType: 1 })
 SaleSchema.index({ taxYear: 1, productType: 1 })
+SaleSchema.index({ customerId: 1 })
+SaleSchema.index({ customerId: 1, taxYear: 1, date: -1 })
 
 const Sale: Model<ISaleDoc> =
   mongoose.models.Sale || mongoose.model<ISaleDoc>('Sale', SaleSchema)

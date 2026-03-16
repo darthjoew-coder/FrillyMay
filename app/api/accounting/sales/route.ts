@@ -24,11 +24,19 @@ export async function GET(req: NextRequest) {
     const productType = searchParams.get('productType')
     if (productType) filter.productType = productType
 
+    const customerId = searchParams.get('customerId')
+    if (customerId) filter.customerId = customerId
+
     const page = Math.max(1, Number(searchParams.get('page') || 1))
     const limit = Math.min(100, Number(searchParams.get('limit') || 50))
 
     const [sales, total] = await Promise.all([
-      Sale.find(filter).sort({ date: -1 }).skip((page - 1) * limit).limit(limit).lean(),
+      Sale.find(filter)
+        .populate('customerId', 'displayName')
+        .sort({ date: -1 })
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .lean(),
       Sale.countDocuments(filter),
     ])
 

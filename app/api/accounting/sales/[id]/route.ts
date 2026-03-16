@@ -6,7 +6,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
   try {
     await connectDB()
     const { id } = await params
-    const sale = await Sale.findById(id).lean()
+    const sale = await Sale.findById(id).populate('customerId', 'displayName').lean()
     if (!sale) return NextResponse.json({ error: 'Sale not found' }, { status: 404 })
     return NextResponse.json({ data: sale })
   } catch (err) {
@@ -23,6 +23,9 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     if (body.date) {
       body.taxYear = new Date(body.date).getFullYear()
     }
+
+    // Allow clearing customerId by passing null explicitly
+    if ('customerId' in body && !body.customerId) body.customerId = null
 
     const sale = await Sale.findByIdAndUpdate(id, body, { new: true, runValidators: true }).lean()
     if (!sale) return NextResponse.json({ error: 'Sale not found' }, { status: 404 })

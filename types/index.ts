@@ -169,6 +169,36 @@ export interface IReceipt {
   uploadedAt: string
 }
 
+export type CustomerTag = 'retail' | 'wholesale' | 'restaurant' | 'family' | 'other'
+
+export interface ICustomer {
+  _id: string
+  firstName: string
+  lastName: string
+  businessName?: string
+  displayName: string
+  email?: string
+  phone?: string
+  addressLine1?: string
+  addressLine2?: string
+  city?: string
+  state?: string
+  zip?: string
+  tags?: CustomerTag[]
+  notes?: string
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface ICustomerSummary {
+  lifetimeTotal: number
+  ytdTotal: number
+  orderCount: number
+  avgSale: number
+  lastSaleDate?: string
+}
+
 export interface ISale {
   _id: string
   date: string
@@ -177,6 +207,8 @@ export interface ISale {
   unit?: string
   unitPrice?: number
   totalAmount: number
+  customerId?: string
+  customer?: Pick<ICustomer, '_id' | 'displayName'>
   customerName?: string
   paymentMethod: PaymentMethod
   referenceNumber?: string
@@ -184,6 +216,12 @@ export interface ISale {
   taxYear: number
   createdAt: string
   updatedAt: string
+}
+
+export interface IDashboardTiles {
+  monthlyTotals: { month: number; label: string; total: number }[]
+  salesByProduct: { productType: string; total: number; quantity: number | null }[]
+  topCustomers: { customerId: string; displayName: string; total: number; count: number }[]
 }
 
 export interface IAccountingReport {

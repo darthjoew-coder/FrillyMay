@@ -80,6 +80,24 @@ export const EXPENSE_STATUSES = [
   { value: 'finalized', label: 'Finalized' },
 ]
 
+// Fiscal year starts in January (month 1) by default. Change this to adjust all reporting.
+export const FISCAL_YEAR_START_MONTH = 1 // 1 = January
+
+export const CUSTOMER_TAGS = [
+  { value: 'retail', label: 'Retail' },
+  { value: 'wholesale', label: 'Wholesale' },
+  { value: 'restaurant', label: 'Restaurant' },
+  { value: 'family', label: 'Family/Friend' },
+  { value: 'other', label: 'Other' },
+]
+
+export const US_STATES = [
+  'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA',
+  'KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ',
+  'NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT',
+  'VA','WA','WV','WI','WY',
+]
+
 export const DEFAULT_EXPENSE_CATEGORIES = [
   { name: 'Feed', type: 'expense', scheduleFBucket: 'Feed purchased (Line 12)', sortOrder: 1 },
   { name: 'Livestock Purchases', type: 'expense', scheduleFBucket: 'Livestock purchased for resale (Line 32)', sortOrder: 2 },

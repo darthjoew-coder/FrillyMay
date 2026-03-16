@@ -5,6 +5,7 @@ import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
 import Textarea from '@/components/ui/Textarea'
 import Button from '@/components/ui/Button'
+import CustomerSearch from '@/components/customers/CustomerSearch'
 import { ISale } from '@/types'
 import { PAYMENT_METHODS, SALE_PRODUCT_TYPES } from '@/lib/constants'
 
@@ -27,6 +28,8 @@ export default function SaleForm({ initial, editId }: SaleFormProps) {
     quantity: initial?.quantity?.toString() || '',
     unit: initial?.unit || '',
     unitPrice: initial?.unitPrice?.toString() || '',
+    customerId: initial?.customerId || '',
+    customerDisplayName: initial?.customer?.displayName || initial?.customerName || '',
     customerName: initial?.customerName || '',
     paymentMethod: initial?.paymentMethod || '',
     referenceNumber: initial?.referenceNumber || '',
@@ -40,20 +43,26 @@ export default function SaleForm({ initial, editId }: SaleFormProps) {
     setLoading(true)
     setError('')
     try {
-      const payload = {
-        ...form,
+      const payload: Record<string, unknown> = {
+        date: form.date,
+        productType: form.productType,
         totalAmount: parseFloat(form.totalAmount),
-        quantity: form.quantity ? parseFloat(form.quantity) : undefined,
-        unitPrice: form.unitPrice ? parseFloat(form.unitPrice) : undefined,
-        quantity_undefined: undefined,
+        paymentMethod: form.paymentMethod,
       }
-      // clean up empty strings
-      if (!payload.quantity) delete (payload as Record<string, unknown>).quantity
-      if (!payload.unitPrice) delete (payload as Record<string, unknown>).unitPrice
-      if (!form.unit) delete (payload as Record<string, unknown>).unit
-      if (!form.customerName) delete (payload as Record<string, unknown>).customerName
-      if (!form.referenceNumber) delete (payload as Record<string, unknown>).referenceNumber
-      delete (payload as Record<string, unknown>).quantity_undefined
+      if (form.notes) payload.notes = form.notes
+      if (form.referenceNumber) payload.referenceNumber = form.referenceNumber
+      if (form.quantity) payload.quantity = parseFloat(form.quantity)
+      if (form.unitPrice) payload.unitPrice = parseFloat(form.unitPrice)
+      if (form.unit) payload.unit = form.unit
+      if (form.customerId) {
+        payload.customerId = form.customerId
+        payload.customerName = form.customerDisplayName
+      } else if (form.customerName) {
+        payload.customerName = form.customerName
+        payload.customerId = null
+      } else {
+        payload.customerId = null
+      }
 
       const url = editId ? `/api/accounting/sales/${editId}` : '/api/accounting/sales'
       const method = editId ? 'PUT' : 'POST'
@@ -80,13 +89,7 @@ export default function SaleForm({ initial, editId }: SaleFormProps) {
       )}
 
       <div className="grid grid-cols-2 gap-4">
-        <Input
-          label="Date"
-          type="date"
-          value={form.date}
-          onChange={e => set('date', e.target.value)}
-          required
-        />
+        <Input label="Date" type="date" value={form.date} onChange={e => set('date', e.target.value)} required />
         <Select
           label="Product Type"
           value={form.productType}
@@ -132,7 +135,7 @@ export default function SaleForm({ initial, editId }: SaleFormProps) {
           label="Unit (optional)"
           value={form.unit}
           onChange={e => set('unit', e.target.value)}
-          placeholder="e.g. lbs, dozen, head"
+          placeholder="lbs, dozen, head"
         />
         <Input
           label="Unit Price (optional)"
@@ -145,20 +148,31 @@ export default function SaleForm({ initial, editId }: SaleFormProps) {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <Input
-          label="Customer Name (optional)"
-          value={form.customerName}
-          onChange={e => set('customerName', e.target.value)}
-          placeholder="e.g. John Smith"
+      {/* Customer — search existing or free-type */}
+      <div className={form.customerId ? '' : 'grid grid-cols-2 gap-4'}>
+        <CustomerSearch
+          value={form.customerId}
+          displayValue={form.customerDisplayName}
+          onChange={(id, name) =>
+            setForm(f => ({ ...f, customerId: id, customerDisplayName: name, customerName: id ? name : f.customerName }))
+          }
         />
-        <Input
-          label="Reference # (optional)"
-          value={form.referenceNumber}
-          onChange={e => set('referenceNumber', e.target.value)}
-          placeholder="Check # / invoice #"
-        />
+        {!form.customerId && (
+          <Input
+            label="Or enter name (optional)"
+            value={form.customerName}
+            onChange={e => set('customerName', e.target.value)}
+            placeholder="Type if not in system"
+          />
+        )}
       </div>
+
+      <Input
+        label="Reference # (optional)"
+        value={form.referenceNumber}
+        onChange={e => set('referenceNumber', e.target.value)}
+        placeholder="Check # / invoice #"
+      />
 
       <Textarea
         label="Notes (optional)"
@@ -168,12 +182,8 @@ export default function SaleForm({ initial, editId }: SaleFormProps) {
       />
 
       <div className="flex gap-3">
-        <Button type="submit" loading={loading}>
-          {editId ? 'Update Sale' : 'Record Sale'}
-        </Button>
-        <Button type="button" variant="secondary" onClick={() => router.back()}>
-          Cancel
-        </Button>
+        <Button type="submit" loading={loading}>{editId ? 'Update Sale' : 'Record Sale'}</Button>
+        <Button type="button" variant="secondary" onClick={() => router.back()}>Cancel</Button>
       </div>
     </form>
   )

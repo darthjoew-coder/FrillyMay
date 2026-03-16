@@ -11,6 +11,7 @@ const navItems = [
   { href: '/feeding', label: 'Feeding & Nutrition', icon: '🌾' },
   { href: '/breeding', label: 'Breeding', icon: '🐣' },
   { href: '/accounting', label: 'Accounting', icon: '💰' },
+  { href: '/customers', label: 'Customers', icon: '👥' },
 ]
 
 interface SidebarProps {
