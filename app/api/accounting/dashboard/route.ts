@@ -77,7 +77,7 @@ export async function GET(req: NextRequest) {
             as: 'customerDoc',
           },
         },
-        { $unwind: { path: '$customerDoc', preserveNullAndEmpty: false } },
+        { $unwind: { path: '$customerDoc', preserveNullAndEmptyArrays: false } },
         {
           $project: {
             customerId: '$_id',

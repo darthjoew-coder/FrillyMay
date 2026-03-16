@@ -86,7 +86,8 @@ export default function CustomersPage() {
             icon="👥"
             title="No customers yet"
             description={search ? 'No customers match your search.' : 'Add your first customer to get started.'}
-            action={!search ? { label: 'Add Customer', href: '/customers/new' } : undefined}
+            actionLabel={!search ? 'Add Customer' : undefined}
+            actionHref={!search ? '/customers/new' : undefined}
           />
         ) : (
           <CustomerTable customers={customers} onDelete={(id, name) => setDeleteTarget({ id, name })} />
@@ -94,7 +95,7 @@ export default function CustomersPage() {
       </PageWrapper>
 
       <Modal
-        isOpen={!!deleteTarget}
+        open={!!deleteTarget}
         title="Remove customer?"
         description={`"${deleteTarget?.name}" will be deactivated if they have sales, or permanently deleted if they have none.`}
         onClose={() => setDeleteTarget(null)}
