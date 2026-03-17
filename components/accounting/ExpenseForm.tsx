@@ -74,7 +74,16 @@ export default function ExpenseForm({ initial, editId }: ExpenseFormProps) {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Failed to save')
-      router.push(`/accounting/expenses/${data.data._id}`)
+      const savedId: string = data.data._id
+      if (uploadFile && !editId) {
+        try {
+          const fd = new FormData()
+          fd.append('file', uploadFile)
+          fd.append('expenseId', savedId)
+          await fetch('/api/accounting/receipts', { method: 'POST', body: fd })
+        } catch { /* don't block navigation */ }
+      }
+      router.push(`/accounting/expenses/${savedId}`)
       router.refresh()
     } catch (err: unknown) {
       setError((err as Error).message)
@@ -218,52 +227,50 @@ export default function ExpenseForm({ initial, editId }: ExpenseFormProps) {
         </div>
       </form>
 
-      {editId && (
-        <div className="border border-gray-200 rounded-lg p-6 space-y-4">
-          <h3 className="text-base font-semibold text-gray-900">Receipts</h3>
+      <div className="border border-gray-200 rounded-lg p-6 space-y-4">
+        <h3 className="text-base font-semibold text-gray-900">Receipt</h3>
 
-          {receipts.length > 0 ? (
-            <ul className="space-y-2">
-              {receipts.map(r => (
-                <li key={r._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <div>
-                    <a
-                      href={`/api/accounting/receipts/${r._id}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm font-medium text-blue-600 hover:underline"
-                    >
-                      {r.fileName}
-                    </a>
-                    <p className="text-xs text-gray-500 mt-0.5">
-                      {(r.fileSize / 1024).toFixed(1)} KB &middot; {r.mimeType}
-                    </p>
-                  </div>
-                  <Button
-                    type="button"
-                    variant="danger"
-                    onClick={() => handleDeleteReceipt(r._id)}
+        {editId && receipts.length > 0 && (
+          <ul className="space-y-2">
+            {receipts.map(r => (
+              <li key={r._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div>
+                  <a
+                    href={`/api/accounting/receipts/${r._id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium text-blue-600 hover:underline"
                   >
-                    Delete
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-sm text-gray-500">No receipts attached.</p>
-          )}
+                    {r.fileName}
+                  </a>
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    {(r.fileSize / 1024).toFixed(1)} KB &middot; {r.mimeType}
+                  </p>
+                </div>
+                <Button type="button" variant="danger" onClick={() => handleDeleteReceipt(r._id)}>
+                  Delete
+                </Button>
+              </li>
+            ))}
+          </ul>
+        )}
 
-          {uploadError && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded text-sm">{uploadError}</div>
-          )}
+        {editId && receipts.length === 0 && (
+          <p className="text-sm text-gray-500">No receipts attached.</p>
+        )}
 
-          <div className="flex items-center gap-3">
-            <input
-              type="file"
-              accept="image/*,.pdf"
-              onChange={e => setUploadFile(e.target.files?.[0] || null)}
-              className="text-sm text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-sm file:font-medium file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100"
-            />
+        {uploadError && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded text-sm">{uploadError}</div>
+        )}
+
+        <div className="flex items-center gap-3">
+          <input
+            type="file"
+            accept="image/*,.pdf"
+            onChange={e => setUploadFile(e.target.files?.[0] || null)}
+            className="text-sm text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-sm file:font-medium file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100"
+          />
+          {editId && (
             <Button
               type="button"
               variant="secondary"
@@ -273,9 +280,13 @@ export default function ExpenseForm({ initial, editId }: ExpenseFormProps) {
             >
               Upload Receipt
             </Button>
-          </div>
+          )}
         </div>
-      )}
+
+        {!editId && uploadFile && (
+          <p className="text-xs text-green-700">✓ {uploadFile.name} will be attached after saving</p>
+        )}
+      </div>
     </div>
   )
 }
