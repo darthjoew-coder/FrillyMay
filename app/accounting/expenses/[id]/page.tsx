@@ -16,7 +16,7 @@ export default async function ExpenseDetailPage({ params }: { params: Promise<{ 
   const expense = await Expense.findById(id).populate('categoryId').lean()
   if (!expense) notFound()
 
-  const receiptsRaw = await Receipt.find({ expenseId: id }).select('-fileData').lean()
+  const receiptsRaw = await Receipt.find({ expenseId: id }).select('-imageData -thumbnailData -rawApiResponse').lean()
   const receipts = receiptsRaw as unknown as Record<string, unknown>[]
 
   const e = expense as unknown as Record<string, unknown>
@@ -142,7 +142,10 @@ export default async function ExpenseDetailPage({ params }: { params: Promise<{ 
                         {String(r.fileName)}
                       </a>
                       <p className="text-xs text-gray-500 mt-0.5">
-                        {((r.fileSize as number) / 1024).toFixed(1)} KB &middot; {String(r.mimeType)}
+                        {r.source === 'mobile'
+                          ? `Mobile capture${r.merchantName ? ` · ${String(r.merchantName)}` : ''}`
+                          : `${((r.imageSize as number || r.fileSize as number || 0) / 1024).toFixed(1)} KB · ${String(r.imageMimeType || r.mimeType || '')}`
+                        }
                       </p>
                     </div>
                     <a

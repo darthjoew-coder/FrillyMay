@@ -163,9 +163,15 @@ export interface IExpense {
 export interface IReceipt {
   _id: string
   expenseId: string
+  source: 'web' | 'mobile'
   fileName: string
-  mimeType: string
-  fileSize: number
+  imageMimeType: string
+  imageSize: number
+  // mobile-only fields
+  merchantName?: string
+  receiptDate?: string
+  totalAmount?: number
+  status?: string
   uploadedAt: string
 }
 

@@ -244,7 +244,11 @@ export default function ExpenseForm({ initial, editId }: ExpenseFormProps) {
                     {r.fileName}
                   </a>
                   <p className="text-xs text-gray-500 mt-0.5">
-                    {(r.fileSize / 1024).toFixed(1)} KB &middot; {r.mimeType}
+                    {r.source === 'mobile' ? (
+                      <>Mobile capture{r.merchantName ? ` · ${r.merchantName}` : ''}</>
+                    ) : (
+                      <>{(r.imageSize / 1024).toFixed(1)} KB &middot; {r.imageMimeType}</>
+                    )}
                   </p>
                 </div>
                 <Button type="button" variant="danger" onClick={() => handleDeleteReceipt(r._id)}>

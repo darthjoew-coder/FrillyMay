@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/db'
-import { MobileReceipt } from '@/models/MobileReceipt'
+import { Receipt } from '@/models/Receipt'
 import { verifyMobileAuth, corsHeaders, corsOptionsResponse } from '@/lib/mobileAuth'
 import mongoose from 'mongoose'
 
@@ -20,20 +20,23 @@ export async function GET(req: NextRequest) {
     const limit = Math.min(50, parseInt(searchParams.get('limit') || '20'))
     const status = searchParams.get('status')
 
-    const filter: Record<string, unknown> = { userId: new mongoose.Types.ObjectId(user.userId) }
+    const filter: Record<string, unknown> = {
+      source: 'mobile',
+      userId: new mongoose.Types.ObjectId(user.userId),
+    }
     if (status) filter.status = status
 
     const [docs, total] = await Promise.all([
-      MobileReceipt.find(filter)
+      Receipt.find(filter)
         .select('-imageData -rawApiResponse') // exclude heavy binary fields from list
         .sort({ createdAt: -1 })
         .skip((page - 1) * limit)
         .limit(limit)
         .lean(),
-      MobileReceipt.countDocuments(filter),
+      Receipt.countDocuments(filter),
     ])
 
-    // Convert thumbnail Buffer to base64 for list display, keep other fields
+    // Convert thumbnail Buffer to base64 for list display
     const receipts = docs.map(doc => {
       const r = { ...doc } as Record<string, unknown>
       if (doc.thumbnailData) {
@@ -92,14 +95,15 @@ export async function POST(req: NextRequest) {
       try {
         extractedData = JSON.parse(extractedDataStr)
         extractionStatus = extractedData.error ? 'failed' : 'completed'
-        status = extractionStatus === 'completed' ? 'needs_review' : 'needs_review'
+        status = 'needs_review'
       } catch {
         extractionStatus = 'failed'
         status = 'needs_review'
       }
     }
 
-    const receipt = await MobileReceipt.create({
+    const receipt = await Receipt.create({
+      source: 'mobile',
       userId: new mongoose.Types.ObjectId(user.userId),
       imageData,
       imageMimeType: file.type,

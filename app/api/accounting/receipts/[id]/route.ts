@@ -11,11 +11,20 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
     const receipt = await Receipt.findById(id)
     if (!receipt) return NextResponse.json({ error: 'Receipt not found' }, { status: 404 })
 
-    return new Response(new Uint8Array(receipt.fileData), {
+    // Support both old web receipts (fileData/mimeType/fileSize) and new unified receipts (imageData/imageMimeType/imageSize)
+    const raw = receipt as unknown as Record<string, unknown>
+    const imageData = (receipt.imageData || raw.fileData) as Buffer | undefined
+    const mimeType = receipt.imageMimeType || (raw.mimeType as string | undefined) || 'application/octet-stream'
+    const fileName = receipt.fileName || 'receipt'
+    const size = receipt.imageSize || (raw.fileSize as number | undefined) || 0
+
+    if (!imageData) return NextResponse.json({ error: 'Image data not found' }, { status: 404 })
+
+    return new Response(new Uint8Array(imageData), {
       headers: {
-        'Content-Type': receipt.mimeType,
-        'Content-Disposition': `inline; filename="${encodeURIComponent(receipt.fileName)}"`,
-        'Content-Length': String(receipt.fileSize),
+        'Content-Type': mimeType,
+        'Content-Disposition': `inline; filename="${encodeURIComponent(fileName)}"`,
+        'Content-Length': String(size),
         'Cache-Control': 'private, max-age=3600',
       },
     })

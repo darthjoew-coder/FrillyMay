@@ -10,9 +10,28 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
     const raw = await Expense.findById(id).populate('categoryId', 'name scheduleFBucket').lean() as any
     if (!raw) return NextResponse.json({ error: 'Expense not found' }, { status: 404 })
 
-    const receipts = await Receipt.find({ expenseId: id })
-      .select('fileName mimeType fileSize uploadedAt')
+    const rawReceipts = await Receipt.find({ expenseId: id })
+      .select('fileName imageMimeType imageSize source merchantName receiptDate totalAmount status uploadedAt createdAt')
       .lean()
+
+    // Normalize receipt shape for the web UI (handle old docs with mimeType/fileSize)
+    const receipts = rawReceipts.map(r => {
+      const doc = r as unknown as Record<string, unknown>
+      return {
+        _id: r._id,
+        expenseId: id,
+        source: r.source || 'web',
+        fileName: r.fileName || (r.merchantName ? `Receipt ${r.merchantName}` : 'receipt'),
+        imageMimeType: r.imageMimeType || (doc.mimeType as string | undefined) || '',
+        imageSize: r.imageSize || (doc.fileSize as number | undefined) || 0,
+        // mobile-specific
+        merchantName: r.merchantName,
+        receiptDate: r.receiptDate,
+        totalAmount: r.totalAmount,
+        status: r.status,
+        uploadedAt: r.uploadedAt || r.createdAt,
+      }
+    })
 
     return NextResponse.json({ data: { ...raw, category: raw.categoryId, receipts } })
   } catch (err) {
@@ -48,7 +67,7 @@ export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ 
     const expense = await Expense.findById(id)
     if (!expense) return NextResponse.json({ error: 'Expense not found' }, { status: 404 })
 
-    // Cascade delete receipts
+    // Cascade delete all receipts linked to this expense
     await Receipt.deleteMany({ expenseId: id })
     await Expense.findByIdAndDelete(id)
 

@@ -3,7 +3,7 @@ import { connectDB } from '@/lib/db'
 import { Receipt } from '@/models/Receipt'
 import { Expense } from '@/models/Expense'
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     if (!expenseId) return NextResponse.json({ error: 'expenseId is required' }, { status: 400 })
 
     if (file.size > MAX_FILE_SIZE) {
-      return NextResponse.json({ error: 'File too large (max 5MB)' }, { status: 400 })
+      return NextResponse.json({ error: 'File too large (max 10MB)' }, { status: 400 })
     }
 
     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'application/pdf']
@@ -32,11 +32,12 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(arrayBuffer)
 
     const receipt = await Receipt.create({
+      source: 'web',
       expenseId,
       fileName: file.name,
-      mimeType: file.type,
-      fileSize: file.size,
-      fileData: buffer,
+      imageMimeType: file.type,
+      imageSize: file.size,
+      imageData: buffer,
     })
 
     return NextResponse.json({
@@ -44,8 +45,8 @@ export async function POST(req: NextRequest) {
         _id: receipt._id,
         expenseId: receipt.expenseId,
         fileName: receipt.fileName,
-        mimeType: receipt.mimeType,
-        fileSize: receipt.fileSize,
+        imageMimeType: receipt.imageMimeType,
+        imageSize: receipt.imageSize,
         uploadedAt: receipt.uploadedAt,
       },
     }, { status: 201 })

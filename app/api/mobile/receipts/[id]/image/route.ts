@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { connectDB } from '@/lib/db'
-import { MobileReceipt } from '@/models/MobileReceipt'
+import { Receipt } from '@/models/Receipt'
 import { verifyMobileAuth, corsHeaders, corsOptionsResponse } from '@/lib/mobileAuth'
 import mongoose from 'mongoose'
 
@@ -20,8 +20,9 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   try {
     await connectDB()
     const { id } = await params
-    const doc = await MobileReceipt.findOne({
+    const doc = await Receipt.findOne({
       _id: id,
+      source: 'mobile',
       userId: new mongoose.Types.ObjectId(user.userId),
     }).select('imageData imageMimeType').lean()
 
