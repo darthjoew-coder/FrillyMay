@@ -1,8 +1,57 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/lib/db'
 import { Receipt } from '@/models/Receipt'
+import { Expense } from '@/models/Expense'
+import { ExpenseCategory } from '@/models/ExpenseCategory'
 import { verifyMobileAuth, corsHeaders, corsOptionsResponse } from '@/lib/mobileAuth'
 import mongoose from 'mongoose'
+
+function mapPaymentMethod(pm?: string): string {
+  if (!pm) return 'other'
+  const lower = pm.toLowerCase()
+  if (lower.includes('cash')) return 'cash'
+  if (lower.includes('check') || lower.includes('cheque')) return 'check'
+  if (lower.includes('credit')) return 'credit_card'
+  if (lower.includes('debit')) return 'debit_card'
+  if (lower.includes('bank') || lower.includes('transfer') || lower.includes('ach')) return 'bank_transfer'
+  return 'other'
+}
+
+/** Find or create a default expense category for auto-created expenses */
+async function getDefaultCategoryId(): Promise<mongoose.Types.ObjectId> {
+  let cat = await ExpenseCategory.findOne({ type: 'expense', active: true }).sort({ sortOrder: 1 }).lean()
+  if (!cat) {
+    cat = await ExpenseCategory.create({ name: 'General', type: 'expense', scheduleFBucket: '', active: true, sortOrder: 0 })
+  }
+  return cat._id as mongoose.Types.ObjectId
+}
+
+/** Create a draft Expense from OCR-extracted receipt data and link the receipt */
+export async function createExpenseFromReceipt(
+  extractedData: Record<string, unknown>,
+  receiptId: mongoose.Types.ObjectId,
+): Promise<mongoose.Types.ObjectId> {
+  const categoryId = await getDefaultCategoryId()
+
+  const rawDate = extractedData.receiptDate as string | undefined
+  const date = rawDate ? new Date(rawDate) : new Date()
+  const taxYear = date.getFullYear()
+
+  const expense = await Expense.create({
+    vendor: (extractedData.merchantName as string | undefined) || 'Unknown Vendor',
+    amount: (extractedData.totalAmount as number | undefined) ?? 0,
+    date,
+    taxYear,
+    categoryId,
+    paymentMethod: mapPaymentMethod(extractedData.paymentMethod as string | undefined),
+    productLine: 'general',
+    status: 'draft',
+    description: 'Auto-created from mobile receipt',
+  })
+
+  await Receipt.findByIdAndUpdate(receiptId, { expenseId: expense._id })
+  return expense._id as mongoose.Types.ObjectId
+}
 
 export async function OPTIONS() {
   return corsOptionsResponse()
@@ -123,6 +172,9 @@ export async function POST(req: NextRequest) {
       rawApiResponse: extractedData.rawApiResponse as Record<string, unknown> | undefined,
       extractedText: extractedData.extractedText as string | undefined,
     })
+
+    // Auto-create a draft expense linked to this receipt
+    await createExpenseFromReceipt(extractedData, receipt._id as mongoose.Types.ObjectId)
 
     // Return without binary fields
     const responseData = receipt.toObject() as unknown as Record<string, unknown>
