@@ -5,6 +5,31 @@ import { Expense } from '@/models/Expense'
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 
+// GET: list unlinked mobile receipts (source=mobile, no expenseId) for web review
+export async function GET(_req: NextRequest) {
+  try {
+    await connectDB()
+    const docs = await Receipt.find({ source: 'mobile', expenseId: { $exists: false } })
+      .select('-imageData -thumbnailData -rawApiResponse')
+      .sort({ createdAt: -1 })
+      .limit(50)
+      .lean()
+
+    const receipts = docs.map(doc => {
+      const r = { ...doc } as Record<string, unknown>
+      if (doc.thumbnailData) {
+        r.thumbnailBase64 = `data:image/jpeg;base64,${(doc.thumbnailData as Buffer).toString('base64')}`
+      }
+      delete r.thumbnailData
+      return r
+    })
+
+    return NextResponse.json({ data: receipts })
+  } catch (err) {
+    return NextResponse.json({ error: String(err) }, { status: 500 })
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     await connectDB()

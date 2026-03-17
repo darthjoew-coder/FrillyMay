@@ -13,7 +13,24 @@ import Modal from '@/components/ui/Modal'
 import { IExpense, IExpenseCategory } from '@/types'
 import { PRODUCT_LINES, EXPENSE_STATUSES } from '@/lib/constants'
 
+interface PendingReceipt {
+  _id: string
+  merchantName?: string
+  receiptDate?: string
+  totalAmount?: number
+  category?: string
+  status?: string
+  createdAt: string
+  thumbnailBase64?: string
+}
+
 const currentYear = new Date().getFullYear()
+
+function fmtDate(str?: string) {
+  if (!str) return '—'
+  try { return new Date(str).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) }
+  catch { return str }
+}
 
 export default function ExpensesPage() {
   const [expenses, setExpenses] = useState<IExpense[]>([])
@@ -21,6 +38,7 @@ export default function ExpensesPage() {
   const [loading, setLoading] = useState(true)
   const [deleteTarget, setDeleteTarget] = useState<{ id: string; vendor: string } | null>(null)
   const [deleting, setDeleting] = useState(false)
+  const [pendingReceipts, setPendingReceipts] = useState<PendingReceipt[]>([])
 
   const [year, setYear] = useState(String(currentYear))
   const [categoryId, setCategoryId] = useState('')
@@ -34,6 +52,9 @@ export default function ExpensesPage() {
     fetch('/api/accounting/categories')
       .then(r => r.json())
       .then(d => setCategories(d.data || []))
+    fetch('/api/accounting/receipts')
+      .then(r => r.json())
+      .then(d => setPendingReceipts(d.data || []))
   }, [])
 
   const fetchExpenses = useCallback(async () => {
@@ -101,6 +122,42 @@ export default function ExpensesPage() {
             <Input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} label="To" />
           </div>
         </div>
+
+        {/* Pending mobile receipts */}
+        {pendingReceipts.length > 0 && (
+          <div className="mb-6 border border-amber-200 rounded-xl bg-amber-50 p-4">
+            <h2 className="text-sm font-semibold text-amber-800 mb-3">
+              📱 {pendingReceipts.length} unprocessed mobile receipt{pendingReceipts.length !== 1 ? 's' : ''} — review and link to an expense
+            </h2>
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {pendingReceipts.map(r => (
+                <a
+                  key={r._id}
+                  href={`/api/accounting/receipts/${r._id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-white border border-amber-200 rounded-lg p-3 hover:border-amber-400 transition-colors"
+                >
+                  {r.thumbnailBase64 ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={r.thumbnailBase64} alt="receipt" className="w-12 h-12 object-cover rounded shrink-0" />
+                  ) : (
+                    <div className="w-12 h-12 bg-amber-100 rounded shrink-0 flex items-center justify-center text-xl">🧾</div>
+                  )}
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-gray-900 truncate">{r.merchantName || 'Unknown merchant'}</p>
+                    <p className="text-xs text-gray-500">{fmtDate(r.receiptDate || r.createdAt)}</p>
+                    {r.totalAmount != null && (
+                      <p className="text-xs font-semibold text-gray-700">
+                        {r.totalAmount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                      </p>
+                    )}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
 
         {loading ? (
           <LoadingSpinner />
