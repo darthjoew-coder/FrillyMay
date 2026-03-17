@@ -7,13 +7,25 @@ import Badge from '@/components/ui/Badge'
 import PregnancyCountdown from '@/components/breeding/PregnancyCountdown'
 import { IBreedingEvent } from '@/types'
 import { formatDate, capitalize, getGestationProgress } from '@/lib/utils'
+import { connectDB } from '@/lib/db'
+import { BreedingEvent } from '@/models/BreedingEvent'
 
 async function getEvent(id: string): Promise<IBreedingEvent | null> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-    const res = await fetch(`${baseUrl}/api/breeding/${id}`, { cache: 'no-store' })
-    if (!res.ok) return null
-    return (await res.json()).data
+    await connectDB()
+    const doc = await BreedingEvent.findById(id)
+      .populate('damId', 'tagId name _id')
+      .populate('sireId', 'tagId name _id')
+      .lean()
+    if (!doc) return null
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const e = doc as any
+    return {
+      ...e,
+      _id: String(e._id),
+      dam: e.damId ? { _id: String(e.damId._id), tagId: e.damId.tagId, name: e.damId.name } : null,
+      sire: e.sireId ? { _id: String(e.sireId._id), tagId: e.sireId.tagId, name: e.sireId.name } : null,
+    } as IBreedingEvent
   } catch { return null }
 }
 

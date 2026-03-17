@@ -6,13 +6,17 @@ import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import { IFeedingRecord } from '@/types'
 import { formatDate, capitalize } from '@/lib/utils'
+import { connectDB } from '@/lib/db'
+import { FeedingRecord } from '@/models/FeedingRecord'
 
 async function getRecord(id: string): Promise<IFeedingRecord | null> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-    const res = await fetch(`${baseUrl}/api/feeding/${id}`, { cache: 'no-store' })
-    if (!res.ok) return null
-    return (await res.json()).data
+    await connectDB()
+    const doc = await FeedingRecord.findById(id).populate('animalId', 'tagId name _id').lean()
+    if (!doc) return null
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const r = doc as any
+    return { ...r, _id: String(r._id), animal: r.animalId ? { _id: String(r.animalId._id), tagId: r.animalId.tagId, name: r.animalId.name } : null } as IFeedingRecord
   } catch { return null }
 }
 
