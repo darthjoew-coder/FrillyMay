@@ -18,7 +18,7 @@ export default async function EditExpensePage({ params }: { params: Promise<{ id
   // Flatten for form initial values
   const initial = {
     _id: String(e._id),
-    date: e.date ? String(e.date).split('T')[0] : '',
+    date: e.date ? (e.date as Date).toISOString().split('T')[0] : '',
     vendor: String(e.vendor || ''),
     amount: e.amount as number,
     categoryId: category ? String(category._id) : String(e.categoryId || ''),

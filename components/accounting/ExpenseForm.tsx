@@ -35,6 +35,7 @@ export default function ExpenseForm({ initial, editId }: ExpenseFormProps) {
     productLine: initial?.productLine || '',
     description: initial?.description || '',
     notes: initial?.notes || '',
+    status: initial?.status || 'draft',
   })
 
   const set = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }))
@@ -201,6 +202,16 @@ export default function ExpenseForm({ initial, editId }: ExpenseFormProps) {
           required
           options={PRODUCT_LINES}
           placeholder="Select product line"
+        />
+
+        <Select
+          label="Status"
+          value={form.status}
+          onChange={e => set('status', e.target.value)}
+          options={[
+            { value: 'draft', label: 'Draft' },
+            { value: 'finalized', label: 'Finalized' },
+          ]}
         />
 
         <Input
