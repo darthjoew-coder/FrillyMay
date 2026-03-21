@@ -148,14 +148,22 @@ export default async function ExpenseDetailPage({ params }: { params: Promise<{ 
                         }
                       </p>
                     </div>
-                    <a
-                      href={`/api/accounting/receipts/${String(r._id)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-medium text-blue-600 hover:underline"
-                    >
-                      Download
-                    </a>
+                    <div className="flex items-center gap-3">
+                      <Link
+                        href={`/accounting/receipts/${String(r._id)}/edit`}
+                        className="text-xs font-medium text-gray-600 hover:underline"
+                      >
+                        Edit
+                      </Link>
+                      <a
+                        href={`/api/accounting/receipts/${String(r._id)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-medium text-blue-600 hover:underline"
+                      >
+                        Download
+                      </a>
+                    </div>
                   </li>
                 ))}
               </ul>

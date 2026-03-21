@@ -33,6 +33,20 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
   }
 }
 
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    await connectDB()
+    const { id } = await params
+    const body = await req.json()
+    const allowed = { status: body.status }
+    const receipt = await Receipt.findByIdAndUpdate(id, allowed, { new: true, runValidators: true }).lean()
+    if (!receipt) return NextResponse.json({ error: 'Receipt not found' }, { status: 404 })
+    return NextResponse.json({ data: receipt })
+  } catch (err) {
+    return NextResponse.json({ error: String(err) }, { status: 400 })
+  }
+}
+
 export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectDB()
