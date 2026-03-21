@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
     const [rawExpenses, total] = await Promise.all([
       Expense.find(filter)
         .populate('categoryId', 'name')
-        .sort({ date: -1 })
+        .sort({ createdAt: -1 })
         .skip((page - 1) * limit)
         .limit(limit)
         .lean(),
