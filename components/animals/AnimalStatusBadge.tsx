@@ -5,6 +5,8 @@ const variantMap: Record<AnimalStatus, 'green' | 'gray' | 'red'> = {
   active: 'green',
   sold: 'gray',
   deceased: 'red',
+  butchered: 'gray',
+  culled: 'red',
 }
 
 export default function AnimalStatusBadge({ status }: { status: AnimalStatus }) {

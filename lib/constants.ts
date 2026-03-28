@@ -38,7 +38,57 @@ export const BREEDING_STATUSES = [
   'pending', 'confirmed_pregnant', 'not_pregnant', 'delivered', 'lost',
 ]
 
-export const ANIMAL_STATUSES = ['active', 'sold', 'deceased']
+export const ANIMAL_STATUSES = ['active', 'sold', 'deceased', 'butchered', 'culled']
+
+/**
+ * IRS Schedule F livestock classification options.
+ * Displayed in AnimalForm and used for Schedule F reporting logic.
+ */
+export const ANIMAL_CLASSIFICATIONS = [
+  {
+    value: 'resale_inventory',
+    label: 'Purchased for Resale',
+    description: 'Bought and held for market sale. Cost basis deferred to Schedule F Line 1b on sale.',
+  },
+  {
+    value: 'raised_for_sale',
+    label: 'Raised for Sale',
+    description: 'Born/raised on farm. Full sale price goes to Schedule F Line 2. No cost basis.',
+  },
+  {
+    value: 'breeding_dairy',
+    label: 'Breeding / Dairy',
+    description: 'Breeding stock or dairy animals. Excluded from Schedule F – report on Form 4797.',
+  },
+  {
+    value: 'draft_work',
+    label: 'Draft / Work Animal',
+    description: 'Work or draft animals. Excluded from Schedule F – report on Form 4797.',
+  },
+  {
+    value: 'other',
+    label: 'Other',
+    description: 'Does not fit a standard category.',
+  },
+  {
+    value: 'review_needed',
+    label: 'Review Needed',
+    description: 'Classification not yet assigned. Will not appear on any Schedule F lines.',
+  },
+]
+
+export const ACQUISITION_METHODS = [
+  { value: 'purchased', label: 'Purchased' },
+  { value: 'born_on_farm', label: 'Born on Farm' },
+  { value: 'transferred', label: 'Transferred In' },
+  { value: 'other', label: 'Other' },
+]
+
+export const ANIMAL_SALE_TYPES = [
+  { value: 'auction', label: 'Auction / Sale Barn' },
+  { value: 'private', label: 'Private Sale' },
+  { value: 'other', label: 'Other' },
+]
 
 export const SEX_OPTIONS = ['male', 'female', 'unknown']
 

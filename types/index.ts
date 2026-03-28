@@ -2,8 +2,22 @@ export type Species =
   | 'cattle' | 'pig' | 'sheep' | 'goat' | 'chicken'
   | 'duck' | 'turkey' | 'rabbit' | 'horse' | 'alpaca' | 'other'
 
-export type AnimalStatus = 'active' | 'sold' | 'deceased'
+export type AnimalStatus = 'active' | 'sold' | 'deceased' | 'butchered' | 'culled'
 export type Sex = 'male' | 'female' | 'unknown'
+
+/**
+ * IRS Schedule F livestock classification.
+ * See models/Animal.ts for full documentation of each value.
+ */
+export type AnimalClassification =
+  | 'resale_inventory'
+  | 'raised_for_sale'
+  | 'breeding_dairy'
+  | 'draft_work'
+  | 'other'
+  | 'review_needed'
+
+export type AcquisitionMethod = 'purchased' | 'born_on_farm' | 'transferred' | 'other'
 
 export type HealthType =
   | 'vaccination' | 'medication' | 'vet_visit' | 'injury'
@@ -28,6 +42,9 @@ export interface IAnimal {
   dateOfBirth?: string
   acquisitionDate?: string
   acquisitionSource?: string
+  acquisitionMethod: AcquisitionMethod
+  classification: AnimalClassification
+  intendedUse?: string
   currentWeight?: number
   status: AnimalStatus
   statusDate?: string
@@ -224,10 +241,60 @@ export interface ISale {
   updatedAt: string
 }
 
+/** Individual animal sale record – drives Schedule F Lines 1 and 2 */
+export interface IAnimalPurchase {
+  _id: string
+  animalId: string
+  purchaseDate: string
+  purchasePrice: number
+  truckingCost: number
+  otherCosts: number
+  costBasis: number
+  sellerName?: string
+  referenceNumber?: string
+  notes?: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type AnimalSaleType = 'auction' | 'private' | 'other'
+
+export interface IAnimalSale {
+  _id: string
+  animalId: string
+  animal?: Pick<IAnimal, '_id' | 'tagId' | 'name' | 'species' | 'classification'>
+  saleDate: string
+  taxYear: number
+  saleAmount: number
+  costBasis: number
+  classificationAtSale: AnimalClassification
+  buyerName?: string
+  saleType?: AnimalSaleType
+  notes?: string
+  createdAt: string
+  updatedAt: string
+}
+
 export interface IDashboardTiles {
   monthlyTotals: { month: number; label: string; total: number }[]
   salesByProduct: { productType: string; total: number; quantity: number | null }[]
   topCustomers: { customerId: string; displayName: string; total: number; count: number }[]
+}
+
+export interface ILivestockScheduleF {
+  /** Schedule F Line 1a – gross sales of purchased livestock (resale_inventory) */
+  line1a: number
+  /** Schedule F Line 1b – cost basis of purchased livestock sold this year */
+  line1b: number
+  /** Schedule F Line 1 net (1a − 1b) */
+  line1Net: number
+  /** Schedule F Line 2 – gross sales of raised livestock */
+  line2: number
+  /** Animals excluded from Schedule F (breeding/dairy/draft) – flag for Form 4797 */
+  form4797Total: number
+  form4797Count: number
+  /** Animals with review_needed classification – not included in any line */
+  reviewNeededCount: number
 }
 
 export interface IAccountingReport {
@@ -236,6 +303,8 @@ export interface IAccountingReport {
     totalAmount: number
     byProductType: { productType: string; total: number; count: number }[]
   }
+  /** Livestock-specific Schedule F lines (Lines 1 and 2) */
+  livestock: ILivestockScheduleF
   expenses: {
     totalAmount: number
     byCategory: { categoryId: string; name: string; scheduleFBucket: string; total: number; count: number }[]
