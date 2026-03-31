@@ -21,12 +21,19 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
       source: 'mobile',
       userId: new mongoose.Types.ObjectId(user.userId),
     })
-      .select('-imageData -thumbnailData')
+      .select('-imageData')
       .lean()
 
     if (!doc) return NextResponse.json({ error: 'Receipt not found' }, { status: 404, headers })
 
-    return NextResponse.json({ data: doc }, { headers })
+    // Convert thumbnailData Buffer → base64 data URL and drop the raw buffer
+    const r = { ...doc } as Record<string, unknown>
+    if (doc.thumbnailData) {
+      r.thumbnailBase64 = `data:image/jpeg;base64,${(doc.thumbnailData as Buffer).toString('base64')}`
+    }
+    delete r.thumbnailData
+
+    return NextResponse.json({ data: r }, { headers })
   } catch (err) {
     console.error('[mobile/receipts/[id] GET]', err)
     return NextResponse.json({ error: 'Failed to fetch receipt' }, { status: 500, headers })

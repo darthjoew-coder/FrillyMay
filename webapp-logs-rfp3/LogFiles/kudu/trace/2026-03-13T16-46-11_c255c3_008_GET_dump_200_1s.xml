@@ -1,0 +1,4 @@
+<step title="Incoming Request" date="2026-03-13T16:46:11.127" instance="c255c3" url="/dump" method="GET" type="request" pid="833,1,16" Host="frillymay.scm.azurewebsites.net" User-Agent="AZURECLI/2.84.0 (MSI)" Accept-Encoding="identity" Authorization="Bea..." x-ms-client-request-id="237b8e73-1efc-11f1-ad8b-50bbb5611067" X-ARR-LOG-ID="237b8e73-1efc-11f1-ad8b-50bbb5611067" CLIENT-IP="12.74.95.92:16392" X-SITE-DEPLOYMENT-ID="FrillyMay" WAS-DEFAULT-HOSTNAME="frillymay.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/dump" X-Client-IP="12.74.95.92" X-Client-Port="16392" >
+  <step title="Cleanup Xml Logs" date="2026-03-13T16:46:11.148" /><!-- duration: 36ms -->
+  <step title="Outgoing response" date="2026-03-13T16:46:11.810" type="response" statusCode="200" statusText="OK" /><!-- duration: 3ms -->
+</step><!-- duration: 688ms -->

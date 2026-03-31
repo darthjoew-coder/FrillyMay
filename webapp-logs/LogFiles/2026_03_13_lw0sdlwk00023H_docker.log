@@ -1,0 +1,376 @@
+2026-03-13T15:47:19.9096375Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-03-13T15:47:29.7932657Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-03-13T15:47:29.8554346Z Container start method called.
+2026-03-13T15:47:29.9918036Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.4:13209/appsvc/node:20-lts_20260115.4.tuxprod for frillymay., DetailsLevel: INFO
+2026-03-13T15:47:29.9937467Z Establishing network.
+2026-03-13T15:47:30.0018343Z Pulling image: appsvc/node:20-lts_20260115.4.tuxprod.
+2026-03-13T15:47:34.9075254Z Container is starting.
+2026-03-13T15:47:34.9086797Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for frillymay., DetailsLevel: INFO
+2026-03-13T15:47:34.9167232Z Establishing user namespace if not established already.
+2026-03-13T15:47:34.9176084Z Establishing network if not established already.
+2026-03-13T15:47:34.9181593Z Mounting volumes.
+2026-03-13T15:47:34.9367925Z Nested mountpoint 
+2026-03-13T15:47:35.0093306Z Nested mountpoint volatile/logs
+2026-03-13T15:47:35.0604309Z Nested mountpoint 
+2026-03-13T15:47:35.1192544Z Nested mountpoint 
+2026-03-13T15:47:35.1391391Z Nested mountpoint 
+2026-03-13T15:47:35.8941755Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for frillymay. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-03-13T15:47:35.9029728Z Creating container.
+2026-03-13T15:47:35.9040930Z Creating pipes for streaming container io.
+2026-03-13T15:47:35.9218980Z Creating stdout named pipe at /podr/container/pipe/25d473b18b79_frillymay/stdout_3674ec9f88d4444ab867549489d8af6e.
+2026-03-13T15:47:35.9240290Z Successfully created stdout named pipe at: /podr/container/pipe/25d473b18b79_frillymay/stdout_3674ec9f88d4444ab867549489d8af6e.
+2026-03-13T15:47:35.9341878Z Opening named pipe /podr/container/pipe/25d473b18b79_frillymay/stdout_3674ec9f88d4444ab867549489d8af6e for reading in non-blocking mode.
+2026-03-13T15:47:35.9514824Z Successfully opened named pipe: /podr/container/pipe/25d473b18b79_frillymay/stdout_3674ec9f88d4444ab867549489d8af6e.
+2026-03-13T15:47:35.9538276Z Successfully removed non-blocking flag from /podr/container/pipe/25d473b18b79_frillymay/stdout_3674ec9f88d4444ab867549489d8af6e.
+2026-03-13T15:47:36.0344232Z Creating stderr named pipe at /podr/container/pipe/25d473b18b79_frillymay/stderr_75d59b4166474504948fc4ee17e317c8.
+2026-03-13T15:47:36.0529401Z Successfully created stderr named pipe at: /podr/container/pipe/25d473b18b79_frillymay/stderr_75d59b4166474504948fc4ee17e317c8.
+2026-03-13T15:47:36.0541334Z Opening named pipe /podr/container/pipe/25d473b18b79_frillymay/stderr_75d59b4166474504948fc4ee17e317c8 for reading in non-blocking mode.
+2026-03-13T15:47:36.0546109Z Successfully opened named pipe: /podr/container/pipe/25d473b18b79_frillymay/stderr_75d59b4166474504948fc4ee17e317c8.
+2026-03-13T15:47:36.0547330Z Successfully removed non-blocking flag from /podr/container/pipe/25d473b18b79_frillymay/stderr_75d59b4166474504948fc4ee17e317c8.
+2026-03-13T15:47:36.0826466Z Creating container with image: appsvc/node:20-lts_20260115.4.tuxprod from registry: mcr.microsoft.com and fully qualified image name: mcr.microsoft.com/appsvc/node:20-lts_20260115.4.tuxprod
+2026-03-13T15:47:39.2140887Z Starting container: 25d473b18b79_frillymay.
+2026-03-13T15:47:39.8210689Z Starting watchers and probes.
+2026-03-13T15:47:40.2379169Z Starting metrics collection.
+2026-03-13T15:47:40.2932112Z Container is running.
+2026-03-13T15:47:40.3044465Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container frillymay successfully created and is running., DetailsLevel: INFO
+2026-03-13T15:47:41.1544381Z Container start method finished after 11298 ms.
+2026-03-13T15:47:41.2445995Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container frillymay successfully created and is running., DetailsLevel: INFO
+2026-03-13T15:47:41.3851919Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-03-13T15:48:40.1367293Z Container has finished running with exit code: 254.
+2026-03-13T15:48:40.1923221Z Container is terminating. Grace period: 5 seconds.
+2026-03-13T15:48:40.2475306Z Stop and delete container. Retry count = 0
+2026-03-13T15:48:40.2747351Z Stopping container: 25d473b18b79_frillymay.
+2026-03-13T15:48:40.4726218Z Deleting container: 25d473b18b79_frillymay. Retry count = 0
+2026-03-13T15:48:41.0482084Z Container spec TerminationMessagePolicy  path 
+2026-03-13T15:48:41.0682376Z Container is terminated. Total time elapsed: 859 ms.
+2026-03-13T15:48:41.0700330Z Site container: frillymay terminated during site startup.
+2026-03-13T15:48:41.0974049Z State: Stopping, Action: CancellingStartup, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:48:41.2136381Z Site startup probe failed after 59.5467109 seconds.
+2026-03-13T15:48:41.5203893Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:48:41.5572145Z Failed to start site. Revert by stopping site.
+2026-03-13T15:48:41.6254344Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:48:41.6469412Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:48:41.6561883Z Site: frillymay stopped.
+2026-03-13T15:48:41.6935875Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:48:42.3406830Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:48:43.0850415Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 03/13/2026 15:48:43 (UTC), DetailsLevel: ERR
+2026-03-13T15:48:43.9078089Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 03/13/2026 15:48:43 (UTC), DetailsLevel: ERR
+2026-03-13T15:48:44.7102051Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 03/13/2026 15:48:43 (UTC), DetailsLevel: ERR
+2026-03-13T15:48:46.7725876Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 03/13/2026 15:48:43 (UTC), DetailsLevel: ERR
+2026-03-13T15:48:46.7727199Z Container start method called.
+2026-03-13T15:48:46.7728062Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image mcr.microsoft.com/appsvc/node:20-lts_20260115.4.tuxprod for frillymay., DetailsLevel: INFO
+2026-03-13T15:48:46.7729005Z Establishing network.
+2026-03-13T15:48:46.7730219Z Pulling image: appsvc/node:20-lts_20260115.4.tuxprod.
+2026-03-13T15:48:51.3542733Z Container is starting.
+2026-03-13T15:48:51.3544265Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for frillymay., DetailsLevel: INFO
+2026-03-13T15:48:51.3545140Z Establishing user namespace if not established already.
+2026-03-13T15:48:51.3545961Z Establishing network if not established already.
+2026-03-13T15:48:51.3547010Z Mounting volumes.
+2026-03-13T15:48:51.3731755Z Nested mountpoint 
+2026-03-13T15:48:51.4040314Z Nested mountpoint volatile/logs
+2026-03-13T15:48:51.4344313Z Nested mountpoint 
+2026-03-13T15:48:51.4832101Z Nested mountpoint 
+2026-03-13T15:48:51.5196299Z Nested mountpoint 
+2026-03-13T15:48:51.9944614Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for frillymay. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-03-13T15:48:51.9962106Z Creating container.
+2026-03-13T15:48:52.0044207Z Creating pipes for streaming container io.
+2026-03-13T15:48:52.0047063Z Creating stdout named pipe at /podr/container/pipe/0845a421ba8e_frillymay/stdout_62a7ee28f33c426b886471accd2a3e7f.
+2026-03-13T15:48:52.0140954Z Successfully created stdout named pipe at: /podr/container/pipe/0845a421ba8e_frillymay/stdout_62a7ee28f33c426b886471accd2a3e7f.
+2026-03-13T15:48:52.0154231Z Opening named pipe /podr/container/pipe/0845a421ba8e_frillymay/stdout_62a7ee28f33c426b886471accd2a3e7f for reading in non-blocking mode.
+2026-03-13T15:48:52.0231231Z Successfully opened named pipe: /podr/container/pipe/0845a421ba8e_frillymay/stdout_62a7ee28f33c426b886471accd2a3e7f.
+2026-03-13T15:48:52.0233374Z Successfully removed non-blocking flag from /podr/container/pipe/0845a421ba8e_frillymay/stdout_62a7ee28f33c426b886471accd2a3e7f.
+2026-03-13T15:48:52.0234913Z Creating stderr named pipe at /podr/container/pipe/0845a421ba8e_frillymay/stderr_4f933f2e94a34599b75d29de43373bed.
+2026-03-13T15:48:52.0238704Z Successfully created stderr named pipe at: /podr/container/pipe/0845a421ba8e_frillymay/stderr_4f933f2e94a34599b75d29de43373bed.
+2026-03-13T15:48:52.0330779Z Opening named pipe /podr/container/pipe/0845a421ba8e_frillymay/stderr_4f933f2e94a34599b75d29de43373bed for reading in non-blocking mode.
+2026-03-13T15:48:52.0343809Z Successfully opened named pipe: /podr/container/pipe/0845a421ba8e_frillymay/stderr_4f933f2e94a34599b75d29de43373bed.
+2026-03-13T15:48:52.0411354Z Successfully removed non-blocking flag from /podr/container/pipe/0845a421ba8e_frillymay/stderr_4f933f2e94a34599b75d29de43373bed.
+2026-03-13T15:48:52.0427377Z Creating container with image: appsvc/node:20-lts_20260115.4.tuxprod from registry: mcr.microsoft.com and fully qualified image name: mcr.microsoft.com/appsvc/node:20-lts_20260115.4.tuxprod
+2026-03-13T15:48:52.9532677Z Starting container: 0845a421ba8e_frillymay.
+2026-03-13T15:48:53.0635939Z Starting watchers and probes.
+2026-03-13T15:48:53.0999834Z Starting metrics collection.
+2026-03-13T15:48:53.1004429Z Container is running.
+2026-03-13T15:48:53.1010344Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container frillymay successfully created and is running., DetailsLevel: INFO
+2026-03-13T15:48:53.4472718Z Container start method finished after 6636 ms.
+2026-03-13T15:48:53.4481070Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container frillymay successfully created and is running., DetailsLevel: INFO
+2026-03-13T15:48:53.4564507Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-03-13T15:49:48.6712400Z Container has finished running with exit code: 254.
+2026-03-13T15:49:48.6716269Z Container is terminating. Grace period: 5 seconds.
+2026-03-13T15:49:48.7003484Z Stop and delete container. Retry count = 0
+2026-03-13T15:49:48.7007541Z Stopping container: 0845a421ba8e_frillymay.
+2026-03-13T15:49:48.9379895Z Deleting container: 0845a421ba8e_frillymay. Retry count = 0
+2026-03-13T15:49:49.2535686Z Container spec TerminationMessagePolicy  path 
+2026-03-13T15:49:49.2723179Z Container is terminated. Total time elapsed: 599 ms.
+2026-03-13T15:49:49.2818550Z Site container: frillymay terminated during site startup.
+2026-03-13T15:49:49.3006496Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:48:41, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:49:49.3118832Z Site startup probe failed after 55.8464474 seconds.
+2026-03-13T15:49:49.6509985Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:49:49.6658382Z Failed to start site. Revert by stopping site.
+2026-03-13T15:49:49.6674451Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:49:49.6762354Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:49:49.6762827Z Site: frillymay stopped.
+2026-03-13T15:49:49.6974149Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:49:50.0151752Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:49:50.4877038Z Site: frillymay will be blocked for 1 minutes till 03/13/2026 15:50:50
+2026-03-13T15:49:50.4903997Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: frillymay will be blocked for 1 minutes till 03/13/2026 15:50:50, DetailsLevel: WARN
+2026-03-13T15:49:50.5484114Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 03/13/2026 15:49:50 (UTC), DetailsLevel: WARN
+2026-03-13T15:49:50.6983148Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 03/13/2026 15:49:50 (UTC), DetailsLevel: WARN
+2026-03-13T15:50:18.5356555Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:50:50, DetailsLevel: WARN
+2026-03-13T15:50:18.5439863Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:50:18.9554458Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:50:50, DetailsLevel: WARN
+2026-03-13T15:50:18.9555892Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:50:24.0873478Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:50:50, DetailsLevel: WARN
+2026-03-13T15:50:24.0874041Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:50:29.2901747Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:50:50, DetailsLevel: WARN
+2026-03-13T15:50:29.2902070Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:50:34.6283843Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:50:50, DetailsLevel: WARN
+2026-03-13T15:50:34.6284150Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:50:39.8615235Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:50:50, DetailsLevel: WARN
+2026-03-13T15:50:39.8615803Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:50:45.0577542Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:50:50, DetailsLevel: WARN
+2026-03-13T15:50:45.0578647Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:50:50.2780724Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:50:50, DetailsLevel: WARN
+2026-03-13T15:50:50.2781412Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:50:50.4865387Z Site: frillymay is unblocked.
+2026-03-13T15:50:55.4563935Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:50:50, DetailsLevel: WARN
+2026-03-13T15:50:57.2480416Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:50:50, DetailsLevel: WARN
+2026-03-13T15:50:57.2483218Z Container start method called.
+2026-03-13T15:50:57.2484359Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image mcr.microsoft.com/appsvc/node:20-lts_20260115.4.tuxprod for frillymay., DetailsLevel: INFO
+2026-03-13T15:50:57.2485599Z Establishing network.
+2026-03-13T15:50:57.2487671Z Pulling image: appsvc/node:20-lts_20260115.4.tuxprod.
+2026-03-13T15:51:01.1637797Z Container is starting.
+2026-03-13T15:51:01.1639335Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for frillymay., DetailsLevel: INFO
+2026-03-13T15:51:01.1640698Z Establishing user namespace if not established already.
+2026-03-13T15:51:01.1641930Z Establishing network if not established already.
+2026-03-13T15:51:01.1643753Z Mounting volumes.
+2026-03-13T15:51:01.1659548Z Nested mountpoint 
+2026-03-13T15:51:01.2132588Z Nested mountpoint volatile/logs
+2026-03-13T15:51:01.2934672Z Nested mountpoint 
+2026-03-13T15:51:01.3731745Z Nested mountpoint 
+2026-03-13T15:51:01.3930327Z Nested mountpoint 
+2026-03-13T15:51:03.3993281Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for frillymay. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-03-13T15:51:03.4010494Z Creating container.
+2026-03-13T15:51:03.4604584Z Creating pipes for streaming container io.
+2026-03-13T15:51:03.4797138Z Creating stdout named pipe at /podr/container/pipe/fa0d32767b10_frillymay/stdout_8dcd79d93db5427ca22782aeb4b9f5e2.
+2026-03-13T15:51:03.4801432Z Successfully created stdout named pipe at: /podr/container/pipe/fa0d32767b10_frillymay/stdout_8dcd79d93db5427ca22782aeb4b9f5e2.
+2026-03-13T15:51:03.4805307Z Opening named pipe /podr/container/pipe/fa0d32767b10_frillymay/stdout_8dcd79d93db5427ca22782aeb4b9f5e2 for reading in non-blocking mode.
+2026-03-13T15:51:03.5497124Z Successfully opened named pipe: /podr/container/pipe/fa0d32767b10_frillymay/stdout_8dcd79d93db5427ca22782aeb4b9f5e2.
+2026-03-13T15:51:03.5578603Z Successfully removed non-blocking flag from /podr/container/pipe/fa0d32767b10_frillymay/stdout_8dcd79d93db5427ca22782aeb4b9f5e2.
+2026-03-13T15:51:03.5683916Z Creating stderr named pipe at /podr/container/pipe/fa0d32767b10_frillymay/stderr_4be467b2c5f2442288bfe4dfac4192d3.
+2026-03-13T15:51:03.5865373Z Successfully created stderr named pipe at: /podr/container/pipe/fa0d32767b10_frillymay/stderr_4be467b2c5f2442288bfe4dfac4192d3.
+2026-03-13T15:51:03.5962452Z Opening named pipe /podr/container/pipe/fa0d32767b10_frillymay/stderr_4be467b2c5f2442288bfe4dfac4192d3 for reading in non-blocking mode.
+2026-03-13T15:51:03.6048546Z Successfully opened named pipe: /podr/container/pipe/fa0d32767b10_frillymay/stderr_4be467b2c5f2442288bfe4dfac4192d3.
+2026-03-13T15:51:03.6158619Z Successfully removed non-blocking flag from /podr/container/pipe/fa0d32767b10_frillymay/stderr_4be467b2c5f2442288bfe4dfac4192d3.
+2026-03-13T15:51:03.6248802Z Creating container with image: appsvc/node:20-lts_20260115.4.tuxprod from registry: mcr.microsoft.com and fully qualified image name: mcr.microsoft.com/appsvc/node:20-lts_20260115.4.tuxprod
+2026-03-13T15:51:05.9138810Z Starting container: fa0d32767b10_frillymay.
+2026-03-13T15:51:06.2052533Z Starting watchers and probes.
+2026-03-13T15:51:06.2266145Z Starting metrics collection.
+2026-03-13T15:51:06.2268663Z Container is running.
+2026-03-13T15:51:06.2269766Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container frillymay successfully created and is running., DetailsLevel: INFO
+2026-03-13T15:51:06.8598016Z Container start method finished after 9610 ms.
+2026-03-13T15:51:06.8780407Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container frillymay successfully created and is running., DetailsLevel: INFO
+2026-03-13T15:51:06.8781201Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-03-13T15:51:53.8033119Z Container has finished running with exit code: 254.
+2026-03-13T15:51:53.8091471Z Container is terminating. Grace period: 5 seconds.
+2026-03-13T15:51:53.8282364Z Stop and delete container. Retry count = 0
+2026-03-13T15:51:53.8297875Z Stopping container: fa0d32767b10_frillymay.
+2026-03-13T15:51:53.9584541Z Deleting container: fa0d32767b10_frillymay. Retry count = 0
+2026-03-13T15:51:54.2817153Z Container spec TerminationMessagePolicy  path 
+2026-03-13T15:51:54.2902535Z Container is terminated. Total time elapsed: 463 ms.
+2026-03-13T15:51:54.2916100Z Site container: frillymay terminated during site startup.
+2026-03-13T15:51:54.3222808Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:49:49, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:51:54.3431519Z Site startup probe failed after 46.8036163 seconds.
+2026-03-13T15:51:54.5040188Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:51:54.5342459Z Failed to start site. Revert by stopping site.
+2026-03-13T15:51:54.5349464Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:51:54.5538730Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:51:54.5539005Z Site: frillymay stopped.
+2026-03-13T15:51:54.5635395Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:51:54.9144316Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:51:55.1069217Z Site: frillymay will be blocked for 1 minutes till 03/13/2026 15:52:55
+2026-03-13T15:51:55.1078619Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: frillymay will be blocked for 1 minutes till 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:51:55.1348684Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 03/13/2026 15:51:55 (UTC), DetailsLevel: WARN
+2026-03-13T15:51:55.4533338Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 03/13/2026 15:51:55 (UTC), DetailsLevel: WARN
+2026-03-13T15:51:55.7365130Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:51:55.7365687Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:52:00.6601260Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:52:00.6601524Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:52:05.9188023Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:52:05.9188299Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:52:11.4291021Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:52:11.4291612Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:52:16.7838577Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:52:16.7841281Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:52:22.1627232Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:52:22.1627521Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:52:27.5389903Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:52:27.5390736Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:52:32.8471906Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:52:32.8481556Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:52:38.0075481Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:52:38.0076054Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:52:43.1502777Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:52:43.1503069Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:52:48.4856141Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:52:48.4857143Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:52:53.7246327Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:52:53.7247475Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:52:55.1073600Z Site: frillymay is unblocked.
+2026-03-13T15:52:58.9136903Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:53:00.9614087Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:52:55, DetailsLevel: WARN
+2026-03-13T15:53:00.9617026Z Container start method called.
+2026-03-13T15:53:00.9617683Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image mcr.microsoft.com/appsvc/node:20-lts_20260115.4.tuxprod for frillymay., DetailsLevel: INFO
+2026-03-13T15:53:00.9618751Z Establishing network.
+2026-03-13T15:53:00.9620080Z Pulling image: appsvc/node:20-lts_20260115.4.tuxprod.
+2026-03-13T15:53:04.5209948Z Container is starting.
+2026-03-13T15:53:04.5224064Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for frillymay., DetailsLevel: INFO
+2026-03-13T15:53:04.5310025Z Establishing user namespace if not established already.
+2026-03-13T15:53:04.5311469Z Establishing network if not established already.
+2026-03-13T15:53:04.5312875Z Mounting volumes.
+2026-03-13T15:53:04.5315110Z Nested mountpoint 
+2026-03-13T15:53:04.6006459Z Nested mountpoint volatile/logs
+2026-03-13T15:53:04.7402264Z Nested mountpoint 
+2026-03-13T15:53:04.7971768Z Nested mountpoint 
+2026-03-13T15:53:04.8968184Z Nested mountpoint 
+2026-03-13T15:53:05.3512149Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for frillymay. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-03-13T15:53:05.3610271Z Creating container.
+2026-03-13T15:53:05.3625729Z Creating pipes for streaming container io.
+2026-03-13T15:53:05.3707579Z Creating stdout named pipe at /podr/container/pipe/880a508380d0_frillymay/stdout_da9ccafb4b1d4980b2f47ce2055d05e6.
+2026-03-13T15:53:05.3805450Z Successfully created stdout named pipe at: /podr/container/pipe/880a508380d0_frillymay/stdout_da9ccafb4b1d4980b2f47ce2055d05e6.
+2026-03-13T15:53:05.3820822Z Opening named pipe /podr/container/pipe/880a508380d0_frillymay/stdout_da9ccafb4b1d4980b2f47ce2055d05e6 for reading in non-blocking mode.
+2026-03-13T15:53:05.3902418Z Successfully opened named pipe: /podr/container/pipe/880a508380d0_frillymay/stdout_da9ccafb4b1d4980b2f47ce2055d05e6.
+2026-03-13T15:53:05.3918767Z Successfully removed non-blocking flag from /podr/container/pipe/880a508380d0_frillymay/stdout_da9ccafb4b1d4980b2f47ce2055d05e6.
+2026-03-13T15:53:05.3932081Z Creating stderr named pipe at /podr/container/pipe/880a508380d0_frillymay/stderr_772c7cd2d96b4b4ab1071f0db91a012f.
+2026-03-13T15:53:05.4115499Z Successfully created stderr named pipe at: /podr/container/pipe/880a508380d0_frillymay/stderr_772c7cd2d96b4b4ab1071f0db91a012f.
+2026-03-13T15:53:05.4230133Z Opening named pipe /podr/container/pipe/880a508380d0_frillymay/stderr_772c7cd2d96b4b4ab1071f0db91a012f for reading in non-blocking mode.
+2026-03-13T15:53:05.4308280Z Successfully opened named pipe: /podr/container/pipe/880a508380d0_frillymay/stderr_772c7cd2d96b4b4ab1071f0db91a012f.
+2026-03-13T15:53:05.4315808Z Successfully removed non-blocking flag from /podr/container/pipe/880a508380d0_frillymay/stderr_772c7cd2d96b4b4ab1071f0db91a012f.
+2026-03-13T15:53:05.4321128Z Creating container with image: appsvc/node:20-lts_20260115.4.tuxprod from registry: mcr.microsoft.com and fully qualified image name: mcr.microsoft.com/appsvc/node:20-lts_20260115.4.tuxprod
+2026-03-13T15:53:06.1859401Z Starting container: 880a508380d0_frillymay.
+2026-03-13T15:53:06.3500874Z Starting watchers and probes.
+2026-03-13T15:53:06.3696822Z Starting metrics collection.
+2026-03-13T15:53:06.3701542Z Container is running.
+2026-03-13T15:53:06.3709378Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container frillymay successfully created and is running., DetailsLevel: INFO
+2026-03-13T15:53:06.4525359Z Container start method finished after 5490 ms.
+2026-03-13T15:53:06.4528687Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container frillymay successfully created and is running., DetailsLevel: INFO
+2026-03-13T15:53:06.4528908Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-03-13T15:53:43.2418909Z Container has finished running with exit code: 254.
+2026-03-13T15:53:43.2434000Z Container is terminating. Grace period: 5 seconds.
+2026-03-13T15:53:43.2533122Z Stop and delete container. Retry count = 0
+2026-03-13T15:53:43.2627977Z Stopping container: 880a508380d0_frillymay.
+2026-03-13T15:53:43.3921631Z Deleting container: 880a508380d0_frillymay. Retry count = 0
+2026-03-13T15:53:43.6786748Z Container spec TerminationMessagePolicy  path 
+2026-03-13T15:53:43.6885744Z Container is terminated. Total time elapsed: 444 ms.
+2026-03-13T15:53:43.6894720Z Site container: frillymay terminated during site startup.
+2026-03-13T15:53:43.6899331Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:51:54, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:53:43.7300684Z Site startup probe failed after 37.2299476 seconds.
+2026-03-13T15:53:43.8604740Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:53:43.8685687Z Failed to start site. Revert by stopping site.
+2026-03-13T15:53:43.8687365Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:53:43.8691265Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:53:43.8691464Z Site: frillymay stopped.
+2026-03-13T15:53:43.8989269Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:53:44.2503863Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:53:44.4289186Z Site: frillymay will be blocked for 2 minutes till 03/13/2026 15:55:44
+2026-03-13T15:53:44.4299034Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: frillymay will be blocked for 2 minutes till 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:53:44.4392832Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 03/13/2026 15:53:44 (UTC), DetailsLevel: WARN
+2026-03-13T15:53:44.7073240Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 03/13/2026 15:53:44 (UTC), DetailsLevel: WARN
+2026-03-13T15:53:49.8357760Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:53:49.8358033Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:53:55.1109066Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:53:55.1109338Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:54:00.2946569Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:54:00.2946832Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:54:05.4434400Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:54:05.4435574Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:54:10.6164668Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:54:10.6435120Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:54:15.8789723Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:54:15.8790291Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:54:21.0302784Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:54:21.0303393Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:54:26.2547225Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:54:26.2547870Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:54:31.4101369Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:54:31.4101895Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:54:36.6814051Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:54:36.6814705Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:54:41.8317357Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:54:41.8317956Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:54:47.1640921Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:54:47.1641659Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:54:52.4372024Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:54:52.4373335Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:54:57.6829488Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:54:57.6830518Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:55:02.8180143Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:55:02.8180728Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:55:08.1054705Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:55:08.1055498Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:55:13.3006897Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:55:13.3008248Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:55:18.4390938Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:55:18.4662004Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:55:23.5741195Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:55:23.5745599Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:55:28.7915052Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:55:28.7915917Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:55:33.9849538Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:55:33.9850252Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:55:39.1421314Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:55:39.1424097Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:55:44.3612691Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:55:44.3613622Z Start site prohibitted because the site is being blocked.
+2026-03-13T15:55:44.4370626Z Site: frillymay is unblocked.
+2026-03-13T15:55:49.4794370Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:55:51.2489610Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 03/13/2026 15:55:44, DetailsLevel: WARN
+2026-03-13T15:55:51.2567364Z Container start method called.
+2026-03-13T15:55:51.2580133Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image mcr.microsoft.com/appsvc/node:20-lts_20260115.4.tuxprod for frillymay., DetailsLevel: INFO
+2026-03-13T15:55:51.2755299Z Establishing network.
+2026-03-13T15:55:51.2763048Z Pulling image: appsvc/node:20-lts_20260115.4.tuxprod.
+2026-03-13T15:55:54.0090192Z Container is starting.
+2026-03-13T15:55:54.0091594Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for frillymay., DetailsLevel: INFO
+2026-03-13T15:55:54.0093962Z Establishing user namespace if not established already.
+2026-03-13T15:55:54.0095426Z Establishing network if not established already.
+2026-03-13T15:55:54.0096800Z Mounting volumes.
+2026-03-13T15:55:54.0098762Z Nested mountpoint 
+2026-03-13T15:55:54.1063698Z Nested mountpoint volatile/logs
+2026-03-13T15:55:54.1256562Z Nested mountpoint 
+2026-03-13T15:55:54.1263272Z Nested mountpoint 
+2026-03-13T15:55:54.1443157Z Nested mountpoint 
+2026-03-13T15:55:54.6443404Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for frillymay. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-03-13T15:55:54.6445151Z Creating container.
+2026-03-13T15:55:54.6446468Z Creating pipes for streaming container io.
+2026-03-13T15:55:54.6447566Z Creating stdout named pipe at /podr/container/pipe/94a8c9f69e37_frillymay/stdout_0b99f5fe9fb34e698a45257e78c4c449.
+2026-03-13T15:55:54.6450096Z Successfully created stdout named pipe at: /podr/container/pipe/94a8c9f69e37_frillymay/stdout_0b99f5fe9fb34e698a45257e78c4c449.
+2026-03-13T15:55:54.6452061Z Opening named pipe /podr/container/pipe/94a8c9f69e37_frillymay/stdout_0b99f5fe9fb34e698a45257e78c4c449 for reading in non-blocking mode.
+2026-03-13T15:55:54.6453768Z Successfully opened named pipe: /podr/container/pipe/94a8c9f69e37_frillymay/stdout_0b99f5fe9fb34e698a45257e78c4c449.
+2026-03-13T15:55:54.6454943Z Successfully removed non-blocking flag from /podr/container/pipe/94a8c9f69e37_frillymay/stdout_0b99f5fe9fb34e698a45257e78c4c449.
+2026-03-13T15:55:54.6648782Z Creating stderr named pipe at /podr/container/pipe/94a8c9f69e37_frillymay/stderr_94b7dc9d00a84ce5a01398cc023893a3.
+2026-03-13T15:55:54.6746264Z Successfully created stderr named pipe at: /podr/container/pipe/94a8c9f69e37_frillymay/stderr_94b7dc9d00a84ce5a01398cc023893a3.
+2026-03-13T15:55:54.6766828Z Opening named pipe /podr/container/pipe/94a8c9f69e37_frillymay/stderr_94b7dc9d00a84ce5a01398cc023893a3 for reading in non-blocking mode.
+2026-03-13T15:55:54.6773503Z Successfully opened named pipe: /podr/container/pipe/94a8c9f69e37_frillymay/stderr_94b7dc9d00a84ce5a01398cc023893a3.
+2026-03-13T15:55:54.6777668Z Successfully removed non-blocking flag from /podr/container/pipe/94a8c9f69e37_frillymay/stderr_94b7dc9d00a84ce5a01398cc023893a3.
+2026-03-13T15:55:54.6784581Z Creating container with image: appsvc/node:20-lts_20260115.4.tuxprod from registry: mcr.microsoft.com and fully qualified image name: mcr.microsoft.com/appsvc/node:20-lts_20260115.4.tuxprod
+2026-03-13T15:55:55.2029659Z Starting container: 94a8c9f69e37_frillymay.
+2026-03-13T15:55:55.2760012Z Starting watchers and probes.
+2026-03-13T15:55:55.2764373Z Starting metrics collection.
+2026-03-13T15:55:55.2765518Z Container is running.
+2026-03-13T15:55:55.2956888Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container frillymay successfully created and is running., DetailsLevel: INFO
+2026-03-13T15:55:55.5593572Z Container start method finished after 4301 ms.
+2026-03-13T15:55:55.5595595Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container frillymay successfully created and is running., DetailsLevel: INFO
+2026-03-13T15:55:55.5595826Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-03-13T15:56:33.9963662Z Container has finished running with exit code: 254.
+2026-03-13T15:56:34.0047826Z Container is terminating. Grace period: 5 seconds.
+2026-03-13T15:56:34.0060236Z Stop and delete container. Retry count = 0
+2026-03-13T15:56:34.0152401Z Stopping container: 94a8c9f69e37_frillymay.
+2026-03-13T15:56:34.1442851Z Deleting container: 94a8c9f69e37_frillymay. Retry count = 0
+2026-03-13T15:56:34.3978237Z Container spec TerminationMessagePolicy  path 
+2026-03-13T15:56:34.3984661Z Container is terminated. Total time elapsed: 393 ms.
+2026-03-13T15:56:34.3987668Z Site container: frillymay terminated during site startup.
+2026-03-13T15:56:34.4291110Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:53:43, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:56:34.4696521Z Site startup probe failed after 38.9092036 seconds.
+2026-03-13T15:56:34.6880083Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:56:34, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:56:34.7152686Z Failed to start site. Revert by stopping site.
+2026-03-13T15:56:34.7158937Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:56:34, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:56:34.7169185Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 03/13/2026 15:56:34, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: frillymay terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-03-13T15:56:34.7169414Z Site: frillymay stopped.

@@ -1,0 +1,17 @@
+<step title="Incoming Request" date="2026-03-13T16:44:43.275" instance="c255c3" url="/api/publish?async=true&amp;deployer=GITHUB_ONE_DEPLOY&amp;type=zip&amp;message=%7B%22type%22%3A%22deployment%22%2C%22sha%22%3A%22580630a6e061058c95d0d8e196413ee91aa76095%22%2C%22repoName%22%3A%22darthjoew-coder%2FFrillyMay%22%2C%22actor%22%3A%22darthjoew-coder%22%2C%22slotName%22%3A%22production%22%2C%22commitMessage%22%3A%22trigger%3A%20redeploy%20with%20Run%20from%20Package%20mode%22%7D" method="POST" type="request" pid="833,1,16" Host="frillymay.scm.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_b1c6efcd9954eef1f37ced49ef339779294730f9ab6f944767fc20d2cf74dd38_v3.0.7" Authorization="Bea..." Content-Type="application/octet-stream" Cookie="ARRAffinity=c255c3ea26d3150db49b7a7ac6e829adde8d51979f185f1b97cd2c0eb551c7b8; ARRAffinitySameSite=c255c3ea26d3150db49b7a7ac6e829adde8d51979f185f1b97cd2c0eb551c7b8" Transfer-Encoding="chunked" X-ARR-LOG-ID="d0ea82fb-d416-45bc-a08c-a7672a193f39" CLIENT-IP="40.65.61.37:1024" X-SITE-DEPLOYMENT-ID="FrillyMay" WAS-DEFAULT-HOSTNAME="frillymay.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/publish?async=true&amp;deployer=GITHUB_ONE_DEPLOY&amp;type=zip&amp;message=%7B%22type%22%3A%22deployment%22%2C%22sha%22%3A%22580630a6e061058c95d0d8e196413ee91aa76095%22%2C%22repoName%22%3A%22darthjoew-coder%2FFrillyMay%22%2C%22actor%22%3A%22darthjoew-coder%22%2C%22slotName%22%3A%22production%22%2C%22commitMessage%22%3A%22trigger%3A%20redeploy%20with%20Run%20from%20Package%20mode%22%7D" X-Client-IP="40.65.61.37" X-Client-Port="1024" >
+  <step title="Cleanup Xml Logs" date="2026-03-13T16:44:43.416" /><!-- duration: 71ms -->
+  <step title="OneDeploy" date="2026-03-13T16:44:43.660" >
+    <step title="None repository commit" date="2026-03-13T16:44:43.729" >
+      <step title="Commit id: e420f64a-d882-4859-b30c-901bb702cd73" date="2026-03-13T16:44:43.739" Message="N/A" AuthorName="N/A" AuthorEmail="N/A" /><!-- duration: 11ms -->
+    </step><!-- duration: 24ms -->
+    <step title="Starting PushDeployAsync" date="2026-03-13T16:44:43.757" /><!-- duration: 3ms -->
+    <step title="WEBSITE_RUN_FROM_PACKAGE is set to 1. Writing zip to SitePackagesPath" date="2026-03-13T16:44:43.793" /><!-- duration: 3ms -->
+    <step title="Copying zip to SitePackages /home/data/SitePackages/20260313164443.zip from request body" date="2026-03-13T16:44:43.845" /><!-- duration: 3ms -->
+    <step title="Writing multipart request body to /home/data/SitePackages/20260313164443.zip" date="2026-03-13T16:44:43.852" /><!-- duration: 6ms -->
+    <step title="Start deployment in the background" date="2026-03-13T16:44:45.792" >
+      <step title="Acquiring Deployment Lock" date="2026-03-13T16:44:45.938" /><!-- duration: 41ms -->
+      <step title="Acquired Deployment Lock" date="2026-03-13T16:44:46.208" /><!-- duration: 4ms -->
+    </step><!-- duration: 567ms -->
+  </step><!-- duration: 2716ms -->
+  <step title="Outgoing response" date="2026-03-13T16:44:46.397" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 3ms -->
+</step><!-- duration: 3134ms -->
