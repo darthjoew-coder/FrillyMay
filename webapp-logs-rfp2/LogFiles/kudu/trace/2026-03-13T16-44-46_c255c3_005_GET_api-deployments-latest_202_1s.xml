@@ -1,9 +1,0 @@
-<step title="Incoming Request" date="2026-03-13T16:44:46.476" instance="c255c3" url="/api/deployments/latest?deployer=OneDeploy&amp;time=2026-03-13_16-44-46Z" method="GET" type="request" pid="833,1,5" Host="frillymay.scm.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_b1c6efcd9954eef1f37ced49ef339779294730f9ab6f944767fc20d2cf74dd38_v3.0.7" Authorization="Bea..." Content-Type="application/json; charset=utf-8" Cookie="ARRAffinity=c255c3ea26d3150db49b7a7ac6e829adde8d51979f185f1b97cd2c0eb551c7b8; ARRAffinitySameSite=c255c3ea26d3150db49b7a7ac6e829adde8d51979f185f1b97cd2c0eb551c7b8" Content-Length="0" X-ARR-LOG-ID="a7dd89bf-1d01-472e-ba4b-efae77c5d86a" CLIENT-IP="40.65.61.37:1024" X-SITE-DEPLOYMENT-ID="FrillyMay" WAS-DEFAULT-HOSTNAME="frillymay.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/latest?deployer=OneDeploy&amp;time=2026-03-13_16-44-46Z" X-Client-IP="40.65.61.37" X-Client-Port="1024" >
-  <step title="Cleanup Xml Logs" date="2026-03-13T16:44:46.493" /><!-- duration: 312ms -->
-  <step title="DeploymentService.GetResult" date="2026-03-13T16:44:46.907" >
-    <step title="DeploymentService.GetLatestDeployment" date="2026-03-13T16:44:46.935" >
-      <step title="DeploymentManager.GetResults" date="2026-03-13T16:44:46.955" /><!-- duration: 599ms -->
-    </step><!-- duration: 631ms -->
-  </step><!-- duration: 668ms -->
-  <step title="Outgoing response" date="2026-03-13T16:44:47.586" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 21ms -->
-</step><!-- duration: 1141ms -->
