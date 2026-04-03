@@ -40,7 +40,7 @@ export default function ExpensesPage() {
   const [deleting, setDeleting] = useState(false)
   const [pendingReceipts, setPendingReceipts] = useState<PendingReceipt[]>([])
 
-  const [year, setYear] = useState(String(currentYear))
+  const [year, setYear] = useState('')
   const [categoryId, setCategoryId] = useState('')
   const [productLine, setProductLine] = useState('')
   const [status, setStatus] = useState('')
@@ -84,10 +84,13 @@ export default function ExpensesPage() {
     fetchExpenses()
   }
 
-  const yearOptions = [-2, -1, 0, 1, 2].map(o => ({
-    value: String(currentYear + o),
-    label: String(currentYear + o),
-  }))
+  const yearOptions = [
+    { value: '', label: 'All Years' },
+    ...Array.from({ length: 13 }, (_, i) => currentYear - 2 + i).map(y => ({
+      value: String(y),
+      label: String(y),
+    })),
+  ]
 
   const categoryOptions = categories.map(c => ({ value: c._id, label: c.name }))
 
