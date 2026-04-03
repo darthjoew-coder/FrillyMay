@@ -40,7 +40,7 @@ export default function ExpensesPage() {
   const [deleting, setDeleting] = useState(false)
   const [pendingReceipts, setPendingReceipts] = useState<PendingReceipt[]>([])
 
-  const [year, setYear] = useState('')
+  const [year, setYear] = useState(String(currentYear))
   const [categoryId, setCategoryId] = useState('')
   const [productLine, setProductLine] = useState('')
   const [status, setStatus] = useState('')
