@@ -16,7 +16,7 @@ export default async function EditSalePage({ params }: { params: Promise<{ id: s
 
   const initial = {
     _id: String(s._id),
-    date: s.date ? String(s.date).split('T')[0] : '',
+    date: s.date ? (s.date as Date).toISOString().split('T')[0] : '',
     productType: String(s.productType || '') as never,
     totalAmount: s.totalAmount as number,
     quantity: s.quantity as number | undefined,
