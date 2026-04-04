@@ -154,6 +154,65 @@ export interface IExpenseCategory {
   scheduleFBucket: string
   active: boolean
   sortOrder: number
+  capitalizable: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export type AssetCategory =
+  | 'machinery_equipment'
+  | 'building_structure'
+  | 'land_improvement'
+  | 'breeding_dairy_livestock'
+  | 'orchard_vineyard'
+  | 'vehicle'
+  | 'other'
+
+export type DepreciationMethod =
+  | 'macrs'
+  | 'straight_line'
+  | 'section_179'
+  | 'bonus'
+  | 'not_depreciable'
+
+export type AssetStatus = 'active' | 'disposed' | 'fully_depreciated'
+
+export interface IFarmAsset {
+  _id: string
+  name: string
+  description?: string
+  assetCategory: AssetCategory
+  placedInServiceDate: string
+  acquisitionCost: number
+  freightInstallation: number
+  otherBasisCosts: number
+  costBasis: number
+  salvageValue: number
+  usefulLifeYears: number
+  depreciationMethod: DepreciationMethod
+  section179Amount: number
+  bonusDepreciationPct: number
+  status: AssetStatus
+  disposalDate?: string
+  disposalAmount?: number
+  vendor?: string
+  serialNumber?: string
+  location?: string
+  notes?: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface IAssetDepreciation {
+  _id: string
+  assetId: string
+  asset?: Pick<IFarmAsset, '_id' | 'name' | 'assetCategory'>
+  taxYear: number
+  depreciationAmount: number
+  method: string
+  basisAtStartOfYear: number
+  accumulatedDepreciation: number
+  notes?: string
   createdAt: string
   updatedAt: string
 }
@@ -309,6 +368,11 @@ export interface IAccountingReport {
     totalAmount: number
     byCategory: { categoryId: string; name: string; scheduleFBucket: string; total: number; count: number }[]
     byScheduleF: { bucket: string; total: number }[]
+  }
+  /** Schedule F Line 14d / Form 4562 depreciation */
+  depreciation: {
+    totalAmount: number
+    assetCount: number
   }
   netIncome: number
   missingReceipts: number

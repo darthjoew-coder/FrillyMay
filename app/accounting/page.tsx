@@ -84,10 +84,11 @@ export default function AccountingPage() {
             </div>
 
             {/* Navigation Cards */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
               {[
                 { href: '/accounting/expenses', label: 'Expenses', icon: '🧾', desc: 'Log & manage farm expenses' },
                 { href: '/accounting/sales', label: 'Sales', icon: '💵', desc: 'Record livestock & product sales' },
+                { href: '/accounting/assets', label: 'Capital Assets', icon: '🏗️', desc: 'Depreciation register (Form 4562)' },
                 { href: '/accounting/reports', label: 'Reports', icon: '📊', desc: 'Schedule F tax reports' },
                 { href: '/accounting/categories', label: 'Categories', icon: '🏷️', desc: 'Manage expense categories' },
               ].map(item => (

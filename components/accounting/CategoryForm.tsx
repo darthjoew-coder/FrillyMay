@@ -22,6 +22,7 @@ export default function CategoryForm({ initial, editId, onSaved, onCancel }: Cat
     scheduleFBucket: initial?.scheduleFBucket || '',
     active: initial?.active !== undefined ? initial.active : true,
     sortOrder: initial?.sortOrder?.toString() || '0',
+    capitalizable: initial?.capitalizable || false,
   })
 
   const set = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }))
@@ -37,6 +38,7 @@ export default function CategoryForm({ initial, editId, onSaved, onCancel }: Cat
         scheduleFBucket: form.scheduleFBucket,
         active: form.active,
         sortOrder: parseInt(form.sortOrder) || 0,
+        capitalizable: form.capitalizable,
       }
       const url = editId ? `/api/accounting/categories/${editId}` : '/api/accounting/categories'
       const method = editId ? 'PUT' : 'POST'
@@ -102,7 +104,7 @@ export default function CategoryForm({ initial, editId, onSaved, onCancel }: Cat
             onChange={e => set('sortOrder', e.target.value)}
             placeholder="0"
           />
-          <div className="flex items-end pb-1">
+          <div className="flex flex-col gap-2 pb-1">
             <label className="flex items-center gap-2 cursor-pointer select-none">
               <input
                 type="checkbox"
@@ -111,6 +113,15 @@ export default function CategoryForm({ initial, editId, onSaved, onCancel }: Cat
                 className="w-4 h-4 rounded border-gray-300 text-green-600"
               />
               <span className="text-sm font-medium text-gray-700">Active</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={form.capitalizable}
+                onChange={e => setForm(f => ({ ...f, capitalizable: e.target.checked }))}
+                className="w-4 h-4 rounded border-gray-300 text-amber-600"
+              />
+              <span className="text-sm font-medium text-gray-700">Capitalizable</span>
             </label>
           </div>
         </div>

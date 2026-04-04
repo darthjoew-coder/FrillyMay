@@ -6,6 +6,7 @@ export interface IExpenseCategoryDoc extends Document {
   scheduleFBucket: string
   active: boolean
   sortOrder: number
+  capitalizable: boolean
 }
 
 const ExpenseCategorySchema = new Schema<IExpenseCategoryDoc>(
@@ -15,6 +16,7 @@ const ExpenseCategorySchema = new Schema<IExpenseCategoryDoc>(
     scheduleFBucket: { type: String, default: '' },
     active: { type: Boolean, default: true },
     sortOrder: { type: Number, default: 0 },
+    capitalizable: { type: Boolean, default: false },
   },
   { timestamps: true }
 )

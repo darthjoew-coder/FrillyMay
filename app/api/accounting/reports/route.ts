@@ -4,6 +4,7 @@ import { Expense } from '@/models/Expense'
 import { Sale } from '@/models/Sale'
 import { Receipt } from '@/models/Receipt'
 import { AnimalSale } from '@/models/AnimalSale'
+import { AssetDepreciation } from '@/models/AssetDepreciation'
 
 export async function GET(req: NextRequest) {
   try {
@@ -25,6 +26,8 @@ export async function GET(req: NextRequest) {
       form4797Agg,
       // Animals sold but not yet classified – excluded from all lines
       reviewNeededAgg,
+      // Schedule F Line 14d / Form 4562 – depreciation
+      depreciationAgg,
     ] = await Promise.all([
       // Total non-livestock income (product sales: beef, eggs, other)
       Sale.aggregate([
@@ -139,10 +142,27 @@ export async function GET(req: NextRequest) {
         { $match: { taxYear: year, classificationAtSale: { $in: ['review_needed', 'other'] } } },
         { $group: { _id: null, count: { $sum: 1 } } },
       ]),
+
+      /**
+       * Schedule F Line 14d / Form 4562 – Depreciation and Section 179 expense.
+       * Sum of all AssetDepreciation records for this tax year.
+       */
+      AssetDepreciation.aggregate([
+        { $match: { taxYear: year } },
+        {
+          $group: {
+            _id: null,
+            total: { $sum: '$depreciationAmount' },
+            count: { $sum: 1 },
+          },
+        },
+      ]),
     ])
 
     const totalProductIncome = incomeAgg[0]?.total || 0
     const totalExpenses = expenseAgg[0]?.total || 0
+    const depreciationTotal: number = depreciationAgg[0]?.total || 0
+    const depreciationCount: number = depreciationAgg[0]?.count || 0
 
     // Livestock Schedule F totals
     const line1a: number = line1Agg[0]?.line1a || 0
@@ -199,6 +219,11 @@ export async function GET(req: NextRequest) {
         byScheduleF: Object.entries(byScheduleF)
           .map(([bucket, total]) => ({ bucket, total }))
           .sort((a, b) => b.total - a.total),
+      },
+      depreciation: {
+        /** Schedule F Line 14d – total depreciation deductions this year */
+        totalAmount: depreciationTotal,
+        assetCount: depreciationCount,
       },
       netIncome: totalIncome - totalExpenses,
       missingReceipts: expensesWithoutReceipts,

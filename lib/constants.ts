@@ -133,6 +133,46 @@ export const EXPENSE_STATUSES = [
 // Fiscal year starts in January (month 1) by default. Change this to adjust all reporting.
 export const FISCAL_YEAR_START_MONTH = 1 // 1 = January
 
+/**
+ * Capital assets – IRS Publication 225 / Form 4562 / Schedule F Line 14d
+ */
+export const ASSET_CATEGORIES = [
+  { value: 'machinery_equipment', label: 'Machinery & Equipment', description: '7-year MACRS (most farm equipment)' },
+  { value: 'building_structure', label: 'Buildings & Structures', description: '20-year MACRS (farm buildings)' },
+  { value: 'land_improvement', label: 'Land Improvements', description: '15-year MACRS (fences, roads, drainage)' },
+  { value: 'breeding_dairy_livestock', label: 'Breeding / Dairy Livestock', description: '5-year MACRS (cattle, sheep, goats)' },
+  { value: 'orchard_vineyard', label: 'Orchard / Vineyard', description: '10-year MACRS (trees/vines bearing fruit/nuts)' },
+  { value: 'vehicle', label: 'Vehicle', description: '5-year MACRS (light trucks, autos)' },
+  { value: 'other', label: 'Other', description: 'Other capitalizable property' },
+]
+
+export const DEPRECIATION_METHODS = [
+  { value: 'macrs', label: 'MACRS (Default)', description: 'Modified Accelerated Cost Recovery System — standard for most farm property' },
+  { value: 'straight_line', label: 'Straight-Line (ADS/Elected SL)', description: 'Equal deduction each year over useful life' },
+  { value: 'section_179', label: 'Section 179 — Full Expensing', description: 'Full deduction in year placed in service (up to §179 limits)' },
+  { value: 'bonus', label: 'Bonus Depreciation (§168(k))', description: 'Percentage of basis deducted in first year' },
+  { value: 'not_depreciable', label: 'Not Depreciable', description: 'Land or other non-depreciable property' },
+]
+
+/** Common MACRS recovery periods for farm assets (IRS Rev. Proc. 87-56) */
+export const MACRS_USEFUL_LIFE_OPTIONS = [
+  { value: '3', label: '3 years — Breeding hogs, racehorses' },
+  { value: '5', label: '5 years — Cattle, sheep, goats, vehicles, computers' },
+  { value: '7', label: '7 years — Farm machinery & equipment, office furniture' },
+  { value: '10', label: '10 years — Orchards, vineyards, single-purpose structures' },
+  { value: '15', label: '15 years — Land improvements (fences, roads, drainage)' },
+  { value: '20', label: '20 years — Farm buildings (general-purpose)' },
+  { value: '25', label: '25 years — Water utility property' },
+  { value: '27.5', label: '27.5 years — Residential rental property' },
+  { value: '39', label: '39 years — Non-residential real property' },
+]
+
+export const ASSET_STATUSES = [
+  { value: 'active', label: 'Active' },
+  { value: 'disposed', label: 'Disposed / Sold' },
+  { value: 'fully_depreciated', label: 'Fully Depreciated' },
+]
+
 export const CUSTOMER_TAGS = [
   { value: 'retail', label: 'Retail' },
   { value: 'wholesale', label: 'Wholesale' },

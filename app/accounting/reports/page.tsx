@@ -62,6 +62,10 @@ export default function ReportsPage() {
     }
     rows.push(`Total Expenses,,${report.expenses.totalAmount}`)
     rows.push('')
+    rows.push('=== FORM 4562 / SCHEDULE F LINE 14d — DEPRECIATION ===')
+    rows.push(`Total Depreciation Deduction,,${report.depreciation?.totalAmount || 0}`)
+    rows.push(`Assets with records,,${report.depreciation?.assetCount || 0}`)
+    rows.push('')
     rows.push('=== EXPENSE BREAKDOWN BY CATEGORY ===')
     rows.push('Category,Schedule F Bucket,Amount,Count')
     for (const item of report.expenses.byCategory) {
@@ -255,6 +259,38 @@ export default function ReportsPage() {
                 </tbody>
               </table>
             </div>
+
+            {/* Form 4562 / Schedule F Line 14d — Depreciation */}
+            {report.depreciation && (report.depreciation.totalAmount > 0 || report.depreciation.assetCount > 0) && (
+              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+                <div className="px-6 py-4 border-b border-gray-100">
+                  <h2 className="text-sm font-semibold text-gray-900">Form 4562 / Schedule F Line 14d — Depreciation & Section 179</h2>
+                  <p className="text-xs text-gray-500 mt-0.5">Recorded via the Capital Assets register</p>
+                </div>
+                <div className="px-6 py-4 grid grid-cols-2 gap-4">
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-xs text-gray-500 mb-1">Total Depreciation Deduction</p>
+                    <p className="text-xl font-bold text-red-700">{fmt(report.depreciation.totalAmount)}</p>
+                    <p className="text-xs text-gray-500 mt-1">Flows into Schedule F Line 14d</p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-xs text-gray-500 mb-1">Assets with Depreciation Records</p>
+                    <p className="text-xl font-bold text-gray-900">{report.depreciation.assetCount}</p>
+                    <a href="/accounting/assets" className="text-xs text-blue-600 hover:underline mt-1 inline-block">
+                      View capital assets register →
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {report.depreciation && report.depreciation.totalAmount === 0 && (
+              <div className="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 text-sm text-amber-800">
+                <strong>No depreciation recorded for {year}.</strong> If you have depreciable farm assets (machinery, buildings, land improvements),
+                add them to the{' '}
+                <a href="/accounting/assets" className="underline">capital assets register</a> and record annual depreciation for Schedule F Line 14d / Form 4562.
+              </div>
+            )}
 
             {/* Expense Breakdown by Category */}
             <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">

@@ -125,6 +125,7 @@ export default function ExpenseForm({ initial, editId }: ExpenseFormProps) {
   }
 
   const categoryOptions = categories.map(c => ({ value: c._id, label: c.name }))
+  const selectedCategory = categories.find(c => c._id === form.categoryId)
 
   return (
     <div className="space-y-8 max-w-2xl">
@@ -194,6 +195,20 @@ export default function ExpenseForm({ initial, editId }: ExpenseFormProps) {
             placeholder="e.g. Hay, Minerals"
           />
         </div>
+
+        {selectedCategory?.capitalizable && (
+          <div className="bg-amber-50 border border-amber-300 rounded-lg px-4 py-3 text-sm">
+            <p className="font-semibold text-amber-900">Capital asset — should this be depreciated?</p>
+            <p className="text-amber-800 mt-1">
+              The <strong>{selectedCategory.name}</strong> category is typically a capitalizable asset
+              (useful life &gt; 1 year). IRS Publication 225 requires these to be depreciated over time
+              rather than deducted immediately — unless you elect Section 179 or bonus depreciation.
+            </p>
+            <a href="/accounting/assets/new" className="inline-block mt-2 text-amber-700 underline font-medium hover:text-amber-900">
+              Track as capital asset instead →
+            </a>
+          </div>
+        )}
 
         <Select
           label="Product Line"
