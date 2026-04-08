@@ -12,6 +12,7 @@ const navItems = [
   { href: '/breeding', label: 'Breeding', icon: '🐣' },
   { href: '/accounting', label: 'Accounting', icon: '💰' },
   { href: '/customers', label: 'Customers', icon: '👥' },
+  { href: 'https://lively-beach-0462fae0f.6.azurestaticapps.net/', label: 'Mobile Receipts', icon: '📱' },
 ]
 
 interface SidebarProps {
@@ -65,17 +66,31 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
       {/* Nav */}
       <nav className="flex-1 px-3 py-4 flex flex-col gap-1 overflow-y-auto">
         {navItems.map(item => {
-          const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname.startsWith(item.href))
-          return (
+          const isExternal = item.href.startsWith('http')
+          const isActive = !isExternal && (pathname === item.href || (item.href !== '/dashboard' && pathname.startsWith(item.href)))
+          const className = `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+            isActive
+              ? 'bg-green-700 text-white'
+              : 'text-amber-200 hover:bg-amber-800 hover:text-white'
+          }`
+          return isExternal ? (
+            <a
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onClose}
+              className={className}
+            >
+              <span className="text-base">{item.icon}</span>
+              {item.label}
+            </a>
+          ) : (
             <Link
               key={item.href}
               href={item.href}
               onClick={onClose}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                isActive
-                  ? 'bg-green-700 text-white'
-                  : 'text-amber-200 hover:bg-amber-800 hover:text-white'
-              }`}
+              className={className}
             >
               <span className="text-base">{item.icon}</span>
               {item.label}
