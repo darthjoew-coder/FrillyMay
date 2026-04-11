@@ -32,11 +32,12 @@ export default function ReportsPage() {
 
   function exportCSV() {
     if (!report) return
+    const clean = (s: string) => s.replace(/,/g, '')
     const rows: string[] = []
     rows.push(`Schedule F Tax Report - ${report.year}`)
     rows.push('')
 
-    rows.push('=== PART I — FARM INCOME ===')
+    rows.push('=== PART I - FARM INCOME ===')
     rows.push('')
     rows.push('--- Schedule F Lines 1 & 2: Livestock Sales ---')
     rows.push('Line,Description,Amount')
@@ -51,25 +52,25 @@ export default function ReportsPage() {
     rows.push('--- Other Farm Income ---')
     rows.push('Product Type,Amount,Count')
     for (const item of report.income.byProductType) {
-      rows.push(`${item.productType},${item.total},${item.count}`)
+      rows.push(`${clean(item.productType)},${item.total},${item.count}`)
     }
     rows.push(`Total Income,,${report.income.totalAmount}`)
     rows.push('')
-    rows.push('=== PART II — FARM EXPENSES ===')
+    rows.push('=== PART II - FARM EXPENSES ===')
     rows.push('Line,Description,Amount')
     for (const item of report.expenses.byScheduleF) {
-      rows.push(`${item.bucket},,${item.total}`)
+      rows.push(`${clean(item.bucket)},,${item.total}`)
     }
     rows.push(`Total Expenses,,${report.expenses.totalAmount}`)
     rows.push('')
-    rows.push('=== FORM 4562 / SCHEDULE F LINE 14d — DEPRECIATION ===')
+    rows.push('=== FORM 4562 / SCHEDULE F LINE 14d - DEPRECIATION ===')
     rows.push(`Total Depreciation Deduction,,${report.depreciation?.totalAmount || 0}`)
     rows.push(`Assets with records,,${report.depreciation?.assetCount || 0}`)
     rows.push('')
     rows.push('=== EXPENSE BREAKDOWN BY CATEGORY ===')
     rows.push('Category,Schedule F Bucket,Amount,Count')
     for (const item of report.expenses.byCategory) {
-      rows.push(`${item.name},${item.scheduleFBucket},${item.total},${item.count}`)
+      rows.push(`${clean(item.name)},${clean(item.scheduleFBucket)},${item.total},${item.count}`)
     }
     rows.push('')
     rows.push(`Net Farm Income,,${report.netIncome}`)
