@@ -11,11 +11,12 @@ import { ASSET_CATEGORIES, DEPRECIATION_METHODS, MACRS_USEFUL_LIFE_OPTIONS, ASSE
 interface AssetFormProps {
   initial?: Partial<IFarmAsset>
   editId?: string
+  fromExpenseId?: string
 }
 
 const today = new Date().toISOString().split('T')[0]
 
-export default function AssetForm({ initial, editId }: AssetFormProps) {
+export default function AssetForm({ initial, editId, fromExpenseId }: AssetFormProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -93,7 +94,12 @@ export default function AssetForm({ initial, editId }: AssetFormProps) {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Failed to save')
-      router.push(`/accounting/assets/${data.data._id}`)
+      const assetId: string = data.data._id
+      // If converting from an expense, delete the original expense record
+      if (fromExpenseId) {
+        await fetch(`/api/accounting/expenses/${fromExpenseId}`, { method: 'DELETE' })
+      }
+      router.push(`/accounting/assets/${assetId}`)
       router.refresh()
     } catch (err: unknown) {
       setError((err as Error).message)
@@ -104,6 +110,15 @@ export default function AssetForm({ initial, editId }: AssetFormProps) {
 
   return (
     <div className="max-w-2xl space-y-6">
+      {fromExpenseId && (
+        <div className="bg-red-50 border border-red-300 rounded-lg px-4 py-3 text-sm text-red-800">
+          <p className="font-semibold">Converting from expense</p>
+          <p className="mt-1">
+            When you save this asset, the original expense record will be permanently deleted and replaced
+            by this capital asset. Review the pre-filled details below before saving.
+          </p>
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="space-y-6">
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">{error}</div>
@@ -291,7 +306,7 @@ export default function AssetForm({ initial, editId }: AssetFormProps) {
 
         <div className="flex gap-3">
           <Button type="submit" loading={loading}>
-            {editId ? 'Update Asset' : 'Add Asset'}
+            {editId ? 'Update Asset' : fromExpenseId ? 'Save Asset & Delete Expense' : 'Add Asset'}
           </Button>
           <Button type="button" variant="secondary" onClick={() => router.back()}>
             Cancel

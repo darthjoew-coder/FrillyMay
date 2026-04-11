@@ -197,16 +197,44 @@ export default function ExpenseForm({ initial, editId }: ExpenseFormProps) {
         </div>
 
         {selectedCategory?.capitalizable && (
-          <div className="bg-amber-50 border border-amber-300 rounded-lg px-4 py-3 text-sm">
-            <p className="font-semibold text-amber-900">Capital asset — should this be depreciated?</p>
-            <p className="text-amber-800 mt-1">
-              The <strong>{selectedCategory.name}</strong> category is typically a capitalizable asset
-              (useful life &gt; 1 year). IRS Publication 225 requires these to be depreciated over time
-              rather than deducted immediately — unless you elect Section 179 or bonus depreciation.
-            </p>
-            <a href="/accounting/assets/new" className="inline-block mt-2 text-amber-700 underline font-medium hover:text-amber-900">
-              Track as capital asset instead →
-            </a>
+          <div className="bg-amber-50 border border-amber-400 rounded-lg px-4 py-4 text-sm space-y-3">
+            <div>
+              <p className="font-semibold text-amber-900 text-base">This looks like a capital asset</p>
+              <p className="text-amber-800 mt-1">
+                <strong>{selectedCategory.name}</strong> is a capitalizable category (useful life &gt; 1 year).
+                IRS Publication 225 requires items like this to be depreciated over their recovery period —
+                not deducted as an immediate expense.
+              </p>
+            </div>
+            {editId && (
+              <div className="bg-red-50 border border-red-200 rounded-md px-3 py-2 text-red-800 text-xs font-medium">
+                Warning: clicking "Move to Capital Assets" below will permanently delete this expense
+                record and create a new capital asset in its place. This cannot be undone.
+              </div>
+            )}
+            <div className="flex items-center gap-3 flex-wrap">
+              {editId ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const params = new URLSearchParams()
+                    params.set('fromExpenseId', editId)
+                    if (form.vendor) params.set('vendor', form.vendor)
+                    if (form.amount) params.set('acquisitionCost', form.amount)
+                    if (form.date) params.set('placedInServiceDate', form.date)
+                    if (form.description) params.set('name', form.description)
+                    if (form.notes) params.set('notes', form.notes)
+                    router.push(`/accounting/assets/new?${params}`)
+                  }}
+                  className="inline-flex items-center px-4 py-2 bg-amber-700 text-white text-sm font-semibold rounded-lg hover:bg-amber-800 transition-colors"
+                >
+                  Move to Capital Assets →
+                </button>
+              ) : (
+                <p className="text-xs text-amber-700 italic">Save this expense first, then re-open it to move it to Capital Assets.</p>
+              )}
+              <span className="text-xs text-amber-600">or keep as expense if electing §179 / bonus depreciation</span>
+            </div>
           </div>
         )}
 
