@@ -32,7 +32,7 @@ export default function ReportsPage() {
 
   function exportCSV() {
     if (!report) return
-    const clean = (s: string) => s.replace(/,/g, '')
+    const clean = (s: string) => s.replace(/,/g, '').replace(/\u2014|\u2013/g, '-')
     const rows: string[] = []
     rows.push(`Schedule F Tax Report - ${report.year}`)
     rows.push('')
@@ -76,7 +76,8 @@ export default function ReportsPage() {
     rows.push(`Net Farm Income,,${report.netIncome}`)
 
     const csv = rows.join('\n')
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+    // \uFEFF is the UTF-8 BOM — tells Excel to read as UTF-8 instead of Latin-1
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
