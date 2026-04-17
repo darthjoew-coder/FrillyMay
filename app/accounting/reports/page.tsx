@@ -374,6 +374,54 @@ export default function ReportsPage() {
               </table>
             </div>
 
+            {/* Statement of Owner's Equity */}
+            {report.equity && (
+              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+                <div className="px-6 py-4 border-b border-gray-100">
+                  <h2 className="text-sm font-semibold text-gray-900">Statement of Owner's Equity — {year}</h2>
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    Does not affect Schedule F. Contributions and draws are equity transactions — not income or expenses.
+                  </p>
+                </div>
+                <div className="px-6 py-5 space-y-3 text-sm">
+                  {/* Prior balance */}
+                  <div className="flex justify-between text-gray-700">
+                    <span>Beginning Owner Capital (prior year end)</span>
+                    <span className="font-medium">{fmt(report.equity.priorYearBalance)}</span>
+                  </div>
+                  <div className="border-t border-gray-100 pt-3 space-y-2">
+                    {/* Net income */}
+                    <div className="flex justify-between text-gray-700">
+                      <span className="pl-4">Add: Net Farm Income (Schedule F)</span>
+                      <span className={`font-medium ${report.netIncome >= 0 ? 'text-green-700' : 'text-red-700'}`}>{fmt(report.netIncome)}</span>
+                    </div>
+                    {/* Contributions */}
+                    <div className="flex justify-between text-gray-700">
+                      <span className="pl-4">Add: Owner Contributions</span>
+                      <span className="font-medium text-green-700">{fmt(report.equity.contributions)}</span>
+                    </div>
+                    {/* Draws */}
+                    <div className="flex justify-between text-gray-700">
+                      <span className="pl-4">Less: Owner Draws</span>
+                      <span className="font-medium text-red-700">({fmt(report.equity.draws)})</span>
+                    </div>
+                  </div>
+                  {/* Ending balance */}
+                  <div className="border-t-2 border-gray-900 pt-3 flex justify-between font-bold text-gray-900">
+                    <span>Ending Owner Capital</span>
+                    <span className={report.equity.cumulativeBalance + report.netIncome >= 0 ? 'text-green-700' : 'text-red-700'}>
+                      {fmt(report.equity.cumulativeBalance + report.netIncome)}
+                    </span>
+                  </div>
+                  <div className="pt-2">
+                    <a href="/accounting/equity" className="text-xs text-blue-600 hover:underline">
+                      View all equity transactions →
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Disclaimer */}
             <p className="text-xs text-gray-400 italic">
               This report organises farm records to assist with Schedule F preparation. It does not constitute tax advice.

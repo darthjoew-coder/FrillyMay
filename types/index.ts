@@ -356,6 +356,35 @@ export interface ILivestockScheduleF {
   reviewNeededCount: number
 }
 
+export type EquityTransactionType = 'contribution' | 'draw'
+
+export interface IOwnerEquity {
+  _id: string
+  type: EquityTransactionType
+  amount: number
+  date: string
+  taxYear: number
+  description?: string
+  paymentMethod?: string
+  referenceNumber?: string
+  notes?: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface IOwnerEquitySummary {
+  /** Contributions this year */
+  contributions: number
+  /** Draws this year */
+  draws: number
+  /** Net equity change this year (contributions - draws) */
+  netThisYear: number
+  /** Cumulative balance across all years (all contributions - all draws) */
+  cumulativeBalance: number
+  /** Prior year-end cumulative balance */
+  priorYearBalance: number
+}
+
 export interface IAccountingReport {
   year: number
   income: {
@@ -376,4 +405,6 @@ export interface IAccountingReport {
   }
   netIncome: number
   missingReceipts: number
+  /** Statement of Owner's Equity */
+  equity: IOwnerEquitySummary
 }

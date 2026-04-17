@@ -5,6 +5,7 @@ import { Sale } from '@/models/Sale'
 import { Receipt } from '@/models/Receipt'
 import { AnimalSale } from '@/models/AnimalSale'
 import { AssetDepreciation } from '@/models/AssetDepreciation'
+import { OwnerEquity } from '@/models/OwnerEquity'
 
 export async function GET(req: NextRequest) {
   try {
@@ -28,6 +29,10 @@ export async function GET(req: NextRequest) {
       reviewNeededAgg,
       // Schedule F Line 14d / Form 4562 – depreciation
       depreciationAgg,
+      // Owner equity this year
+      equityThisYearAgg,
+      // Cumulative equity through prior year
+      equityPriorAgg,
     ] = await Promise.all([
       // Total non-livestock income (product sales: beef, eggs, other)
       Sale.aggregate([
@@ -157,12 +162,44 @@ export async function GET(req: NextRequest) {
           },
         },
       ]),
+
+      // Owner equity this year (contributions and draws)
+      OwnerEquity.aggregate([
+        { $match: { taxYear: year } },
+        { $group: { _id: '$type', total: { $sum: '$amount' } } },
+      ]),
+
+      // Cumulative owner equity through end of prior year
+      OwnerEquity.aggregate([
+        { $match: { taxYear: { $lt: year } } },
+        {
+          $group: {
+            _id: '$type',
+            total: { $sum: '$amount' },
+          },
+        },
+      ]),
     ])
 
     const totalProductIncome = incomeAgg[0]?.total || 0
     const totalExpenses = expenseAgg[0]?.total || 0
     const depreciationTotal: number = depreciationAgg[0]?.total || 0
     const depreciationCount: number = depreciationAgg[0]?.count || 0
+
+    // Owner equity calculations
+    const equityMap = (agg: any[]) => {
+      const m: Record<string, number> = {}
+      agg.forEach((r: any) => { m[r._id] = r.total })
+      return m
+    }
+    const thisYearEquity = equityMap(equityThisYearAgg)
+    const priorEquity = equityMap(equityPriorAgg)
+    const contributions: number = thisYearEquity['contribution'] || 0
+    const draws: number = thisYearEquity['draw'] || 0
+    const priorContributions: number = priorEquity['contribution'] || 0
+    const priorDraws: number = priorEquity['draw'] || 0
+    const priorYearBalance = priorContributions - priorDraws
+    const cumulativeBalance = priorYearBalance + contributions - draws
 
     // Livestock Schedule F totals
     const line1a: number = line1Agg[0]?.line1a || 0
@@ -227,6 +264,13 @@ export async function GET(req: NextRequest) {
       },
       netIncome: totalIncome - totalExpenses,
       missingReceipts: expensesWithoutReceipts,
+      equity: {
+        contributions,
+        draws,
+        netThisYear: contributions - draws,
+        cumulativeBalance,
+        priorYearBalance,
+      },
     }
 
     return NextResponse.json({ data: report })
