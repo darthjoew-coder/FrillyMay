@@ -7,6 +7,7 @@ import { FarmAsset } from '@/models/FarmAsset'
 import { AssetDepreciation } from '@/models/AssetDepreciation'
 import { ASSET_CATEGORIES, DEPRECIATION_METHODS } from '@/lib/constants'
 import AssetDepreciationForm from '@/components/accounting/AssetDepreciationForm'
+import DepreciationDeleteButton from '@/components/accounting/DepreciationDeleteButton'
 
 function fmtCurrency(n: number) {
   return n.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
@@ -131,6 +132,7 @@ export default async function AssetDetailPage({ params }: { params: Promise<{ id
                       <th className="px-4 py-3 text-right font-semibold text-gray-700">Deduction</th>
                       <th className="px-4 py-3 text-right font-semibold text-gray-700">Accumulated</th>
                       <th className="px-4 py-3 text-left font-semibold text-gray-700">Notes</th>
+                      <th className="px-4 py-3"></th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
@@ -142,6 +144,9 @@ export default async function AssetDetailPage({ params }: { params: Promise<{ id
                         <td className="px-4 py-3 text-right font-semibold text-blue-700">{fmtCurrency(r.depreciationAmount as number)}</td>
                         <td className="px-4 py-3 text-right text-gray-700">{fmtCurrency(r.accumulatedDepreciation as number)}</td>
                         <td className="px-4 py-3 text-gray-500 text-xs">{r.notes ? String(r.notes) : '—'}</td>
+                        <td className="px-4 py-3 text-right">
+                          <DepreciationDeleteButton assetId={id} taxYear={r.taxYear as number} />
+                        </td>
                       </tr>
                     ))}
                   </tbody>

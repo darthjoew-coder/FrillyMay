@@ -15,10 +15,20 @@ const yearOptions = [-3, -2, -1, 0, 1, 2, 3].map(o => ({
 
 const fmt = (n: number) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
 
+interface CalcResult {
+  taxYear: number
+  created: number
+  updated: number
+  skipped: number
+  details: string[]
+}
+
 export default function ReportsPage() {
   const [year, setYear] = useState(currentYear)
   const [report, setReport] = useState<IAccountingReport | null>(null)
   const [loading, setLoading] = useState(true)
+  const [calcLoading, setCalcLoading] = useState(false)
+  const [calcResult, setCalcResult] = useState<CalcResult | null>(null)
 
   const fetchReport = useCallback(async () => {
     setLoading(true)
@@ -29,6 +39,20 @@ export default function ReportsPage() {
   }, [year])
 
   useEffect(() => { fetchReport() }, [fetchReport])
+
+  async function handleCalculateDepreciation() {
+    setCalcLoading(true)
+    setCalcResult(null)
+    try {
+      const res = await fetch(`/api/accounting/assets/calculate-depreciation?year=${year}`, { method: 'POST' })
+      const data = await res.json()
+      setCalcResult(data)
+      // Refresh the report to reflect new depreciation totals
+      fetchReport()
+    } finally {
+      setCalcLoading(false)
+    }
+  }
 
   function exportCSV() {
     if (!report) return
@@ -103,6 +127,9 @@ export default function ReportsPage() {
                 options={yearOptions}
               />
             </div>
+            <Button onClick={handleCalculateDepreciation} loading={calcLoading} disabled={loading}>
+              Calculate Depreciation
+            </Button>
             <Button variant="secondary" onClick={exportCSV} disabled={!report || loading}>
               Export CSV
             </Button>
@@ -116,6 +143,30 @@ export default function ReportsPage() {
           <p className="text-gray-500">No data found for {year}.</p>
         ) : (
           <div className="space-y-8">
+            {/* Depreciation calculation result */}
+            {calcResult && (
+              <div className="bg-green-50 border border-green-300 rounded-xl p-5">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="font-semibold text-green-900">Depreciation calculated for {calcResult.taxYear}</p>
+                    <p className="text-sm text-green-800 mt-1">
+                      {calcResult.created} record{calcResult.created !== 1 ? 's' : ''} created &nbsp;·&nbsp;
+                      {calcResult.updated} updated &nbsp;·&nbsp;
+                      {calcResult.skipped} skipped (already correct or not applicable)
+                    </p>
+                  </div>
+                  <button onClick={() => setCalcResult(null)} className="text-green-600 hover:text-green-900 text-lg font-bold leading-none">×</button>
+                </div>
+                {calcResult.details.length > 0 && (
+                  <ul className="mt-3 space-y-1">
+                    {calcResult.details.map((d, i) => (
+                      <li key={i} className="text-xs text-green-800 font-mono">{d}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+
             {/* Summary Stats */}
             <div className="grid grid-cols-3 gap-4">
               <div className="bg-white border border-gray-200 rounded-xl p-5">
