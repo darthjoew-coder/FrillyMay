@@ -40,6 +40,8 @@ export default function AnimalForm({ initial, editId }: AnimalFormProps) {
     location: initial?.location || '',
     color: initial?.color || '',
     notes: initial?.notes || '',
+    damName: initial?.damName || '',
+    sireName: initial?.sireName || '',
   })
 
   // Purchase record fields – only shown for purchased/resale animals
@@ -206,6 +208,12 @@ export default function AnimalForm({ initial, editId }: AnimalFormProps) {
           <Textarea label="Purchase Notes" value={purchaseForm.notes} onChange={e => setP('notes', e.target.value)} placeholder="Bill of sale details, condition notes, etc." />
         </div>
       )}
+
+      {/* Dam / Sire */}
+      <div className="grid grid-cols-2 gap-4">
+        <Input label="Dam (Mother) Name / Tag" value={form.damName} onChange={e => set('damName', e.target.value)} placeholder="e.g. COW-042 or Daisy" />
+        <Input label="Sire (Father) Name / Tag" value={form.sireName} onChange={e => set('sireName', e.target.value)} placeholder="e.g. BULL-007 or Duke" />
+      </div>
 
       {/* Location / physical */}
       <div className="grid grid-cols-2 gap-4">

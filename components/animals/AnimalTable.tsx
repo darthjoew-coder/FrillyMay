@@ -22,6 +22,7 @@ export default function AnimalTable({ animals, onDelete }: AnimalTableProps) {
             <th className="px-4 py-3 text-left font-semibold text-gray-600">Sex</th>
             <th className="px-4 py-3 text-left font-semibold text-gray-600">Age</th>
             <th className="px-4 py-3 text-left font-semibold text-gray-600">Weight</th>
+            <th className="px-4 py-3 text-left font-semibold text-gray-600">Dam / Sire</th>
             <th className="px-4 py-3 text-left font-semibold text-gray-600">Location</th>
             <th className="px-4 py-3 text-left font-semibold text-gray-600">Status</th>
             <th className="px-4 py-3 text-left font-semibold text-gray-600">Actions</th>
@@ -45,6 +46,11 @@ export default function AnimalTable({ animals, onDelete }: AnimalTableProps) {
               <td className="px-4 py-3 text-gray-600 capitalize">{a.sex}</td>
               <td className="px-4 py-3 text-gray-600">{a.dateOfBirth ? calculateAge(a.dateOfBirth) : '—'}</td>
               <td className="px-4 py-3 text-gray-600">{a.currentWeight ? `${a.currentWeight} kg` : '—'}</td>
+              <td className="px-4 py-3 text-gray-600 text-xs">
+                {a.damName && <div><span className="text-gray-400">Dam:</span> {a.damName}</div>}
+                {a.sireName && <div><span className="text-gray-400">Sire:</span> {a.sireName}</div>}
+                {!a.damName && !a.sireName && '—'}
+              </td>
               <td className="px-4 py-3 text-gray-600">{a.location || '—'}</td>
               <td className="px-4 py-3"><AnimalStatusBadge status={a.status} /></td>
               <td className="px-4 py-3">

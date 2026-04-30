@@ -52,6 +52,8 @@ export interface IAnimal {
   location?: string
   color?: string
   notes?: string
+  damName?: string
+  sireName?: string
   createdAt: string
   updatedAt: string
 }
@@ -69,6 +71,8 @@ export interface IHealthRecord {
   administeredBy?: string
   cost?: number
   nextDueDate?: string
+  isScheduled?: boolean
+  scheduledDate?: string
   weight?: number
   temperature?: number
   notes?: string

@@ -16,6 +16,8 @@ const HealthRecordSchema = new Schema(
     administeredBy: { type: String },
     cost: { type: Number },
     nextDueDate: { type: Date },
+    isScheduled: { type: Boolean, default: false },
+    scheduledDate: { type: Date },
     weight: { type: Number },
     temperature: { type: Number },
     notes: { type: String },
@@ -26,5 +28,6 @@ const HealthRecordSchema = new Schema(
 HealthRecordSchema.index({ animalId: 1 })
 HealthRecordSchema.index({ date: -1 })
 HealthRecordSchema.index({ nextDueDate: 1 })
+HealthRecordSchema.index({ isScheduled: 1, scheduledDate: 1 })
 
 export const HealthRecord = mongoose.models.HealthRecord || mongoose.model('HealthRecord', HealthRecordSchema)

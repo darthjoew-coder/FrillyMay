@@ -78,6 +78,8 @@ const AnimalSchema = new Schema(
     location: { type: String },
     color: { type: String },
     notes: { type: String },
+    damName: { type: String, trim: true },
+    sireName: { type: String, trim: true },
   },
   { timestamps: true }
 )

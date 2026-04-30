@@ -30,6 +30,8 @@ export default function HealthLogForm({ initial, editId, preselectedAnimalId }: 
     administeredBy: initial?.administeredBy || '',
     cost: initial?.cost?.toString() || '',
     nextDueDate: initial?.nextDueDate ? initial.nextDueDate.split('T')[0] : '',
+    isScheduled: initial?.isScheduled ? 'true' : 'false',
+    scheduledDate: initial?.scheduledDate ? initial.scheduledDate.split('T')[0] : '',
     weight: initial?.weight?.toString() || '',
     temperature: initial?.temperature?.toString() || '',
     notes: initial?.notes || '',
@@ -42,12 +44,16 @@ export default function HealthLogForm({ initial, editId, preselectedAnimalId }: 
     setLoading(true)
     setError('')
     try {
+      const isScheduled = form.isScheduled === 'true'
       const payload = {
         ...form,
         cost: form.cost ? parseFloat(form.cost) : undefined,
         weight: form.weight ? parseFloat(form.weight) : undefined,
         temperature: form.temperature ? parseFloat(form.temperature) : undefined,
         nextDueDate: form.nextDueDate || undefined,
+        isScheduled,
+        scheduledDate: isScheduled && form.scheduledDate ? form.scheduledDate : undefined,
+        date: isScheduled ? (form.scheduledDate || form.date) : form.date,
       }
       const url = editId ? `/api/health/${editId}` : '/api/health'
       const method = editId ? 'PUT' : 'POST'
@@ -103,6 +109,34 @@ export default function HealthLogForm({ initial, editId, preselectedAnimalId }: 
       </div>
 
       <Input label="Next Due Date" type="date" value={form.nextDueDate} onChange={e => set('nextDueDate', e.target.value)} hint="Set a reminder for recurring treatments" />
+
+      {/* Scheduled future event */}
+      <div className="border border-blue-200 rounded-xl p-4 bg-blue-50 space-y-3">
+        <div className="flex items-center gap-3">
+          <input
+            type="checkbox"
+            id="isScheduled"
+            checked={form.isScheduled === 'true'}
+            onChange={e => set('isScheduled', e.target.checked ? 'true' : 'false')}
+            className="h-4 w-4 rounded border-gray-300 text-blue-600"
+          />
+          <label htmlFor="isScheduled" className="text-sm font-medium text-blue-900">
+            Schedule as a future event
+          </label>
+        </div>
+        {form.isScheduled === 'true' && (
+          <div className="space-y-2">
+            <p className="text-xs text-blue-700">An alert will appear on the site 7 days before the scheduled date.</p>
+            <Input
+              label="Scheduled Date"
+              type="date"
+              value={form.scheduledDate}
+              onChange={e => set('scheduledDate', e.target.value)}
+              required={form.isScheduled === 'true'}
+            />
+          </div>
+        )}
+      </div>
 
       <Textarea label="Notes" value={form.notes} onChange={e => set('notes', e.target.value)} />
 

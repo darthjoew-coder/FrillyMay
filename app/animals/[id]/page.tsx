@@ -69,6 +69,8 @@ export default async function AnimalDetailPage({ params }: { params: Promise<{ i
     { label: 'Acquisition Date', value: animal.acquisitionDate ? formatDate(animal.acquisitionDate) : '—' },
     { label: 'Acquisition Source', value: animal.acquisitionSource || '—' },
     { label: 'Intended Use', value: animal.intendedUse || '—' },
+    { label: 'Dam (Mother)', value: animal.damName || '—' },
+    { label: 'Sire (Father)', value: animal.sireName || '—' },
     { label: 'Added', value: formatDate(animal.createdAt) },
   ]
 
